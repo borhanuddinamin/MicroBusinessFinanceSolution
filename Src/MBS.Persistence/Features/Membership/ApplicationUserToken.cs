@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MBS.Persistence.Features.Membership
 {
-    public  class ApplicationUserLogin:IdentityUserLogin<Guid>
+    public  class ApplicationUserToken:IdentityUserToken<Guid>
     {
     }
 }

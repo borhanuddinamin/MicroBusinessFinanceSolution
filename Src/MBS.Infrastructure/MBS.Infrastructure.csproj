@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MBS.Application\MBS.Application.csproj" />
+    <ProjectReference Include="..\MBS.Persistence\MBS.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

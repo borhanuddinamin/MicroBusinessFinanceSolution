@@ -7,7 +7,16 @@ using System.Threading.Tasks;
 
 namespace MBS.Persistence.Features.Membership
 {
-    public  class ApplicationUserLogin:IdentityUserLogin<Guid>
+    public  class ApplicationRole:IdentityRole<Guid>
     {
+        public ApplicationRole():base()
+        {
+            
+        } 
+        public ApplicationRole(string role):base()
+        {
+            
+        }
+
     }
 }

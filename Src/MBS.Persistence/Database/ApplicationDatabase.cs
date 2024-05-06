@@ -1,4 +1,5 @@
 ﻿using MBS.Application.DbContext;
+using MBS.Persistence.Features.Membership;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +16,26 @@ using System.Threading.Tasks;
 
 namespace MBS.Persistence.Database
 {
-    public class ApplicationDatabase : IdentityDbContext<>, IApplicationDatabase
+    public class ApplicationDatabase : IdentityDbContext<ApplicationUser,ApplicationRole,
+        Guid,ApplicationUserClaim,ApplicationUserRole,
+        ApplicationUserLogin,ApplicationRoleClaim,
+        ApplicationUserToken>,
+        IApplicationDatabase
     {
-        
-
+        public string connectionString { get; set; }
+        public string migrationString { get; set; }
+        public ApplicationDatabase(string conString,string migraString)
+        {
+            connectionString=conString;
+            migrationString = migraString;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(connectionString,x=>x.MigrationsAssembly(migrationString));
+            }
+
             base.OnConfiguring(optionsBuilder);
         }
 

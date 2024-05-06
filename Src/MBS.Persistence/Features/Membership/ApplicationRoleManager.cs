@@ -1,0 +1,21 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MBS.Persistence.Features.Membership
+{
+    public class ApplicationRoleManeger : RoleManager<ApplicationRole>
+    {
+        public ApplicationRoleManeger(IRoleStore<ApplicationRole> store, 
+            IEnumerable<IRoleValidator<ApplicationRole>> roleValidators, 
+            ILookupNormalizer keyNormalizer, IdentityErrorDescriber errors, 
+            ILogger<RoleManager<ApplicationRole>> logger) : base(store, roleValidators,
+                keyNormalizer, errors, logger)
+        {
+        }
+    }
+}

@@ -1,4 +1,21 @@
+using MBS.Persistence.Database;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+#region DbConnectionSetting
+
+string conString = builder.Configuration.GetConnectionString("connString")??
+                   throw new InvalidOperationException("Connection String not Found");
+string migrationString = typeof(ApplicationDatabase).Assembly.FullName;
+#endregion
+
+
+
+
+
+
 
 // Add services to the container.
 
