@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MBS.Application.DbContext
 {
-    public interface IApplicationDatabase
+    public interface IApplicationDatabase:IDisposable
     {
     }
 }

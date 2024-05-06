@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MBS.Application.Module;
-    public interface IApplicationModule:IModule
-    {
-    }
+namespace MBS.Application.DIModule;
+public interface IDIModule
+{
+}
 

@@ -1,4 +1,9 @@
+using Autofac;
+using Autofac.Core;
+using Autofac.Extensions.DependencyInjection;
 using MBS.Persistence.Database;
+using MBS.Persistence.RegisterDIModule;
+using MBS.Application.RegisterDIModule;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,8 +18,16 @@ string migrationString = typeof(ApplicationDatabase).Assembly.FullName;
 
 
 
+#region AutoFacSetting
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+{
+    containerBuilder.PersistenceModules(conString,migrationString);
+    containerBuilder.ApplicationModules();
 
+});
+#endregion
 
 
 // Add services to the container.
