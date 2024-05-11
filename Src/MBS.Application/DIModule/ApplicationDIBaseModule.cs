@@ -1,6 +1,7 @@
 ﻿
 
 using Autofac;
+using MBS.Domain.Module;
 
 namespace MBS.Application.DIModule
 {
@@ -9,8 +10,7 @@ namespace MBS.Application.DIModule
     {
         protected  override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
+           base.Load(builder);
         }
-
     }
 }

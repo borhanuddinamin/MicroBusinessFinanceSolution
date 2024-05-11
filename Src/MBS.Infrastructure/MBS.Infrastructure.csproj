@@ -11,4 +11,8 @@
     <ProjectReference Include="..\MBS.Persistence\MBS.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AuthorizationSetting\" />
+  </ItemGroup>
+
 </Project>

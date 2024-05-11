@@ -8,15 +8,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MBS.Persistence.RegisterDIModule;
+namespace MBS.Persistence.DIModule.RegisterDIModule;
 
 public static class RegisterPersistenceModules
 {
-   
+
     public static void PersistenceModules(this ContainerBuilder container, string connectionString, string migrationString)
     {
-        
-        container.RegisterModule(new DbModule(connectionString, migrationString));
+
+        container.RegisterModule(new PersistenceModule(connectionString, migrationString));
 
 
     }

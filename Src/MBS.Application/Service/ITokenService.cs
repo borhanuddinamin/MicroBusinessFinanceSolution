@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MBS.Application.DbContext
+namespace MBS.Application.Service
 {
-    public interface IApplicationDatabase
+    public  interface ITokenService
     {
     }
 }

@@ -22,18 +22,22 @@ namespace MBS.Persistence.Database
         ApplicationUserToken>,
         IApplicationDatabase
     {
-        public string connectionString { get; set; }
-        public string migrationString { get; set; }
-        public ApplicationDatabase(string conString,string migraString)
+        public string _connectionString { get; set; }
+        public string _migrationString { get; set; }
+        public ApplicationDatabase()
         {
-            connectionString=conString;
-            migrationString = migraString;
+            
+        }
+        public ApplicationDatabase(string connectionString, string migrationString)
+        {
+            _connectionString= connectionString;
+            _migrationString = migrationString;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(connectionString,x=>x.MigrationsAssembly(migrationString));
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=MBS;Encrypt=False;Trusted_Connection=True; TrustServerCertificate=true", x=>x.MigrationsAssembly("MBS.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"));
             }
 
             base.OnConfiguring(optionsBuilder);

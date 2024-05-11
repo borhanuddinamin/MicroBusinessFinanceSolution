@@ -2,18 +2,18 @@ using Autofac;
 using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using MBS.Persistence.Database;
-using MBS.Persistence.RegisterDIModule;
-using MBS.Application.RegisterDIModule;
 using System.Reflection;
-
+using MBS.Infrastructure.AuthSetting;
+using MBS.Persistence.DIModule.RegisterDIModule;
+using MBS.Application.DIModule.RegisterDIModule;
 var builder = WebApplication.CreateBuilder(args);
 
 
 #region DbConnectionSetting
 
-string conString = builder.Configuration.GetConnectionString("connString")??
-                   throw new InvalidOperationException("Connection String not Found");
-string migrationString = typeof(ApplicationDatabase).Assembly.FullName;
+string connectionString = builder.Configuration.GetConnectionString("connString")??
+                   throw new InvalidOperationException("Connection String not Found");//Server=.\SQLEXPRESS;Database=MBS;Encrypt=False;Trusted_Connection=True; TrustServerCertificate=true;
+var migrationString = typeof(ApplicationDatabase).Assembly.FullName; //MBS.Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 #endregion
 
 
@@ -23,13 +23,25 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-    containerBuilder.PersistenceModules(conString,migrationString);
     containerBuilder.ApplicationModules();
+    containerBuilder.PersistenceModules(connectionString, migrationString);
+    containerBuilder.Infrastructure();
 
 });
 #endregion
 
+#region AuthenticationSetting
+var Key = builder.Configuration["Jwt:Key"];
+var Issuer = builder.Configuration["Jwt:Issuer"];
+var Audience = builder.Configuration["Jwt:Audience"];
+builder.Services.IdentityConfig();
+builder.Services.JwtTokenConfig(Key,Issuer,Audience);
 
+
+
+
+
+#endregion
 // Add services to the container.
 
 builder.Services.AddControllers();

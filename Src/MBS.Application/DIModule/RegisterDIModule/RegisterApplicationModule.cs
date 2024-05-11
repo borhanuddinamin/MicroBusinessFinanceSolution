@@ -8,14 +8,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MBS.Application.RegisterDIModule
+namespace MBS.Application.DIModule.RegisterDIModule
 {
     public static class RegisterApplicationModule
     {
 
         public static void ApplicationModules(this ContainerBuilder container)
         {
-
+            container.RegisterModule(new ApplicationModule());
         }
     }
 }
