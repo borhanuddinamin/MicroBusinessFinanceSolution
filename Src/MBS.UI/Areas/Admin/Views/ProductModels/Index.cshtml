@@ -1,0 +1,39 @@
+﻿
+
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class=" py-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Category List</h2>
+        </div>
+         <div class="col-6 text-end">
+            <a asp-area="Admin" asp-controller="Categories" asp-action="Create" class="btn-info btn btn-sm">
+                <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Category
+             </a>
+        </div>
+    </div>
+</div>
+<br>
+<table class="table table-bordered table-striped table-sm" style="width:100%" id="CategoryTbl">
+    <thead class="bg-info">
+        <tr>
+            <th>Name</th>
+            <th>Display Order</th> 
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+
+
+</table>
+
+@section Scripts{
+    <script src="~/js/Category/category.js"> </script>
+
+}

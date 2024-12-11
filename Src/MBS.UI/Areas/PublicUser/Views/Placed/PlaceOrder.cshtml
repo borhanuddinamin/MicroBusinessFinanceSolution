@@ -1,0 +1,329 @@
+﻿@model List<CartItem>
+@{
+    ViewData["Title"] = "PlaceOrder";
+    // int totalItem = Model?.Sum(item => item.Count) ?? 0;
+    // decimal subTotal = Model?.Sum(item => item.Price * item.Count) ?? 0;
+    // decimal shippingFee = 50; // Example fixed shipping fee
+    // decimal total = subTotal + shippingFee;
+
+    
+    int totalItem = Model?.Sum(item => item.Count) ?? 0;
+    decimal subTotal = Model?.Sum(item => item.Price * item.Count) ?? 0;
+    decimal shippingFee = 50; // Example fixed shipping fee
+    decimal totalAmount = subTotal + shippingFee; // Calculate total amount
+}
+
+<link rel="stylesheet" href="~/css/placedOrder.css" />
+
+<h1>Your Cart Items</h1>
+
+<div class="pd-cry">
+    <div class="row">
+        <div class="col-md-8 ps-4 mt-3">
+            <div class="select-al">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+                        <label class="form-check-label" for="selectAll">SELECT ALL</label>
+                    </div>
+                    <div class="col-md-6 select-dl text-end">
+                        <button><i class="bi bi-trash3"></i> DELETE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 px-5">
+                <div class="row">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            decimal totalItemPrice = item.Price * item.Count;
+                            <div class="col-md-12 pd mb-2">
+                                <div class="row">
+                                    <div class="col-md-6 ps-4">
+                                        <div class="item-list d-flex">
+                                            <div class="item-image d-flex">
+                                                <input class="form-check-input mt-5" type="checkbox" value="" id="itemCheck_@item.Id">
+                                                <div class="pd-img mt-4">
+                                                    <img src="@item.ImagePath" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="item-text prod-text pt-4">
+                                                <p class="f1">@item.Name</p>
+                                                <p class="color1">x @item.Count</p>
+                                                <span class="bs">BEST PRICE</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="pro-price text-end pt-4">
+                                            <p class="f1"><span class="f4">৳</span> @item.Price.ToString("F2")</p>
+                                            <small class="f1"><small>৳</small> @totalItemPrice.ToString("F2")</small>
+                                            <p>
+                                                <a class="color2 pe-1" href="#"><i class="bi bi-heart"></i></a>
+                                                <a class="color2" href="#"><i class="bi bi-trash3"></i></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h2>Your cart is empty.</h2>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-3">
+            <div class="location pe-2">
+                <div class="loc-header">
+                    <p class="color3">Location</p>
+                    <p class="f3"><span class="color3"><i class="bi bi-geo-alt"></i></span> Add Shipping Address</p>
+                </div>
+
+                <div>
+                    <p class="loc-order">Order Summary</p>
+                    <div class="row pe-3">
+                        <div class="col-md-6">
+                            <p class="color2">Subtotal (@totalItem items)</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-end loc-order"><span class="f4">৳ </span> @subTotal.ToString("F2")</p>
+                        </div>
+                    </div>
+                    <div class="row pe-3">
+                        <div class="col-md-6">
+                            <p class="color2">Shipping Fee</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-end loc-order"><span class="f4">৳ </span> @shippingFee.ToString("F2")</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row pe-3">
+                    <div class="col-md-6 pt-2">
+                        <p class="color2">Total</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-end loc-order color2"><span class="f4">৳ </span> @totalAmount.ToString("F2")</p>
+                    </div>
+                </div>
+                <div class="chack-box">
+                    <button class="btn btn-dark w-100" onclick="proceedToCheckout(@totalItem, @totalAmount)">
+                        PROCEED TO CHECKOUT (@totalItem)
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSelectAll(selectAllCheckbox) {
+        const itemCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#selectAll)');
+        itemCheckboxes.forEach(checkbox => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+    }
+
+
+    function proceedToCheckout(totalItems, totalAmount) {
+        debugger
+        // Redirect to the PaymentOrder action with totalItems and totalAmount as parameters
+        window.location.href = `/PublicUser/Placed/PaymentOrder?totalItems=${totalItems}&totalAmount=${totalAmount}`;
+    }
+
+  
+
+
+
+</script>
+
+
+
+@* @model List<CartItem>
+ @{
+     ViewData["Title"] = "PlaceOrder";
+
+     // int totalItem;
+     // decimal shippingFee;
+     // decimal subTotall;
+     // decimal mainTotall;
+ }
+
+ <link rel="stylesheet" href="~/css/placedOrder.css" />
+
+ <h1>Your Cart Items</h1>
+
+
+ <div class="pd-cry">
+     <div class="row">
+         <div class="col-md-8 ps-4 mt-3">
+             <!-- select all -->
+             <div class="select-al">
+
+                 <div class="row ">
+                     <div class="col-md-6">
+                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                         <label class="form-check-label" for="flexCheckChecked">
+                             SELECT ALL
+                         </label>
+                     </div>
+                     <div class="col-md-6 select-dl text-end">
+                         <button><i class="bi bi-trash3"></i> DELETE</button>
+                     </div>
+                 </div>
+             </div>
+
+
+             <!-- product -->
+
+             <div class="mt-3 px-5">
+                 <div class="row">
+
+
+                     @if (Model != null && Model.Any())
+                     {
+                         foreach (var item in Model)
+                         {
+                         
+
+
+                             decimal totall = item.Price * item.Count;
+                             //<li>@item.Name - @item.Price.ToString("C") x @item.Count = @item.Total</li>
+                             <div class="col-md-12 pd mb-2">
+
+                                 <div class="row">
+                                     <div class="col-md-6 ps-4">
+
+
+                                         <div class="item-list d-flex">
+                                             <div class="item-image d-flex">
+
+                                                 <div class="">
+                                                     <input class="form-check-input mt-5" type="checkbox" value="" id="flexCheckDefault">
+                                                 </div>
+                                                 <div class=" pd-img mt-4">
+                                                     <img class="" src="@item.ImagePath" alt="">
+                                                 </div>
+
+                                             </div>
+
+
+
+                                             <div class="item-text prod-text pt-4">
+                                                 <p class="f1">@item.Name</p>
+                                                 <p class="color1">x @item.Count</p>
+                                                 <span class="bs">BEST PRICE</span>
+                                             </div>
+
+
+
+
+
+
+                                         </div>
+                                     </div>
+
+                                     <div class="col-md-6">
+
+                                         <div class=" pro-price text-end pt-4">
+
+                                             <p class="f1"><span class="f4">৳</span> @item.Price.ToString()</p>
+                                             <small class="f1"><small >৳</small> @totall </small>
+                                             <p><a class="color2 pe-1" href="#"><i class="bi bi-heart"></i></a> <a class="color2" href="#"><i class="bi bi-trash3"></i></a></p>
+
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
+
+
+                         }
+                     }
+                     else
+                     {
+                         <h2>Your cart is empty.</h2>
+                     }
+
+                   
+                    
+                    
+
+
+                    
+
+                 </div>
+             </div>
+
+           
+         </div>
+
+
+
+         <div class="col-md-4 mt-3">
+             <div class="location pe-2">
+                 <div class="loc-header">
+                     <p class="color3">Location</p>
+                     <p class="f3"><span class="color3"><i class="bi bi-geo-alt"></i></span> Add Shipping Address</p>
+                 </div>
+
+
+                 <div class="">
+                     <p class="loc-order">Order Summary</p>
+                     <div class="row pe-3">
+                         <div class="col-md-6">
+                             <p class="color2 "> Subtotal (0 items)</p>
+                         </div>
+                         <div class="col-md-6">
+                             <p class="text-end loc-order"><span class="f4">৳ </span> 0</p>
+                         </div>
+                     </div>
+                     <div class="row pe-3">
+                         <div class="col-md-6">
+                             <p class="color2"> Shipping Fee</p>
+                         </div>
+                         <div class="col-md-6">
+                             <p class="text-end loc-order"><span class="f4">৳ </span> 0</p>
+                         </div>
+                     </div>
+
+
+
+
+                 </div>
+                 <div class="order-from d-flex">
+
+                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                     <button class="btn btn-outline-success" type="submit">Search</button>
+
+                 </div>
+
+                 <div class="row pe-3">
+                     <div class="col-md-6 pt-2">
+                         <p class="color2">Total</p>
+                     </div>
+                     <div class="col-md-6">
+                         <p class="text-end loc-order color2"><span class="f4">৳ </span> 0</p>
+                     </div>
+                 </div>
+
+                 <div class="chack-box">
+                     <button class="btn btn-dark w-100">PROCEED TO CHECKOUT (0)</button>
+
+                 </div>
+
+             </div>
+         </div>
+     </div>
+
+ </div>
+ *@

@@ -1,0 +1,57 @@
+﻿@model RoleVM
+@{
+    ViewData["Title"] = "RoleManage";
+    int index = 1;
+}
+
+<div class="p-4 border">
+    <div class="">
+        <h3>Role List</h3>
+        <hr />
+    </div>
+    <div class="my-3">
+        <p class="text-end">
+            <a asp-action="CreateRole" class="btn btn-success btn-sm" >Add New Role</a>
+        </p>
+        <table class="table table-bordered table-striped table-sm table-hover">
+            <thead class="bg-warning">
+                <tr>
+                    <th>#Sl</th>
+                    <th>Role</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+               
+                    @foreach (var item in Model.IdentityRole)
+                    {
+                    <tr>
+                        <td>@index</td>
+                        <td>@item.Name</td>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                   Manage
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item text-dark" asp-action="RoleUpdate" asp-route-id="@item.Id" >Update</a></li>
+                                    <li><a class="dropdown-item text-dark" asp-action="RoleUpdate" asp-route-id="@item.Id">Delete</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                        index++;
+                    }
+                    
+               
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+

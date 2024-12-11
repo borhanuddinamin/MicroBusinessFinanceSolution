@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Unit>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="py-3">
+    <div class="row pt-4">
+        <div class="col-md-6">
+            <h2>Create Units</h2>
+        </div>
+        <div class="col-md-6">
+            <p class="text-end">
+                <a asp-action="Upsert" asp-controller="Units" class="btn btn-info btn-sm"><i class="bi bi-plus-circle"></i>&nbsp; Create New Units</a>
+            </p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <table id="unitTBL" class="table table-bordered table-striped table-sm" style="width:100%">
+        <thead class="bg-info text-light">
+            <tr>
+                <th>Name</th>
+                <th>RelatedTo</th>
+                <th>Related Sign</th>
+                <th>Related By</th>
+                <th>Result</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+    </table>
+
+</div>
+@section Scripts
+    {
+    <script src="~/js/Unit/unit.js"></script>
+}

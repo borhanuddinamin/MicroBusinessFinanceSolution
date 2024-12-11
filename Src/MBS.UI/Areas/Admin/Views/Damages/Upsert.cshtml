@@ -1,0 +1,45 @@
+﻿@model DamageVM
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-dark">Create Damage</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Damage.ProductId"></label>
+			<select asp-for="Damage.ProductId" class="form-control basic-select2" asp-items="@Model.ProductList" id="ProductList">
+				<option value="">Select Product</option>
+			</select>
+			<span asp-validation-for="Damage.ProductId" class="text-danger"></span>
+		</div>
+			<div class="mb-3 damage-qty">
+			<label >pc:</label>
+			<input class="form-control" type="number" id="qty" />
+			
+		</div>
+		<div class="mb-3 " >
+			<label >Date </label>
+			<input  type="text" class="form-control" id="getCurrentDate" >
+			
+			<span asp-validation-for="Damage.CreatedDate" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Damage.Note"></label>
+			<textarea asp-for="Damage.Note" class="form-control" ></textarea>
+			<span asp-validation-for="Damage.Note" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-info" style="width:150px">Create</button>
+		<a asp-controller="Damages" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+	<script src="~/js/Damage/damage.js"> </script>
+}

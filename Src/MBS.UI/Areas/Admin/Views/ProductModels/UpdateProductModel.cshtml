@@ -1,0 +1,175 @@
+﻿@model ProductModel
+
+@{
+    ViewData["Title"] = "Test";
+}
+
+<form method="post" asp-action="Upsert">
+	<input asp-for="Id" hidden >
+	<input asp-for="ProductId" hidden >
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-dark">Update Product Model</h2>
+			<hr />
+		</div>
+	
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="productModelBox">
+			<div class="row">
+
+
+				<div class="col-md-6">
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">@Model.Product.Name</h5>
+
+
+						</div>
+
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-4">
+
+									<div class="image-area">
+										<img id="imageFileUpload" src="@Model.Product.ImageUrl" style="width:100px;height:100px;border-radius:4px" />
+									</div>
+								</div>
+								<div class="col-md-8">
+									<div class="details-table">
+										<table class="table table-bordered">
+											<tbody id="tbl_productModal"><tr><td>Code</td> <td class="prtoducttd">@Model.Product.Code</td> <tr><td> Price</td> <td class="prtoducttd">@Model.Product.SalePrice</td> </tr><tr> </tr><tr><td>Stock</td> <td class="prtoducttd"> 25</td> </tr></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="update-form">
+						<div class="mb-3">
+							<div class="form-check form-switch">
+
+								<input asp-for="IsActive" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+								<label class="form-check-label" asp-for="IsActive"></label>
+								<span asp-validation-for="IsActive" class="text-danger"></span>
+							</div>
+
+							
+						</div>
+
+						<div class="mb-3">
+							<div class="form-check form-switch">
+
+								<input asp-for="IsArrival" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+
+								<label class="form-check-label" asp-for="IsArrival"></label>
+								<span asp-validation-for="IsArrival" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="form-check form-switch">
+								<input asp-for="IsLatest" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+								<label class="form-check-label" asp-for="IsLatest"></label>
+								<span asp-validation-for="IsLatest" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="form-check form-switch">
+								<input asp-for="IsBestSaling" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+								<label class="form-check-label" asp-for="IsBestSaling"></label>
+								<span asp-validation-for="IsBestSaling" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="form-check form-switch">
+								<input asp-for="IsLowStock" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+								<label class="form-check-label" asp-for="IsLowStock"></label>
+								<span asp-validation-for="IsLowStock" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="mb-3">
+							<button type="submit" class="btn btn-info" style="width:150px">Update</button>
+							<a asp-controller="ProductModel" asp-action="Index" class="btn btn-secondary" style="width:150px">
+								Back to List
+							</a>
+						</div>
+					</div>
+
+
+
+
+
+					@* <div class="update-form">
+					<div class="mb-3">
+					<div class="form-check form-switch">
+					<span id="isActiveSwitch">
+					<input checked asp-for="ProductModel.IsActive" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+					</span>
+
+					<label class="form-check-label" asp-for="ProductModel.IsActive"></label>
+					<span asp-validation-for="ProductModel.IsActive" class="text-danger"></span>
+					</div>
+					</div>
+
+					<div class="mb-3">
+					<div class="form-check form-switch">
+					<span id="isArrivalSwitch">
+					<input asp-for="ProductModel.IsArrival" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+					</span>
+
+					<label class="form-check-label" asp-for="ProductModel.IsArrival"></label>
+					<span asp-validation-for="ProductModel.IsArrival" class="text-danger"></span>
+					</div>
+					</div>
+					<div class="mb-3">
+					<div class="form-check form-switch">
+					<input asp-for="ProductModel.IsLatest" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+					<label class="form-check-label" asp-for="ProductModel.IsLatest"></label>
+					<span asp-validation-for="ProductModel.IsLatest" class="text-danger"></span>
+					</div>
+					</div>
+					<div class="mb-3">
+					<div class="form-check form-switch">
+					<input asp-for="ProductModel.IsBestSaling" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+					<label class="form-check-label" asp-for="ProductModel.IsBestSaling"></label>
+					<span asp-validation-for="ProductModel.IsBestSaling" class="text-danger"></span>
+					</div>
+					</div>
+					<div class="mb-3">
+					<div class="form-check form-switch">
+					<input asp-for="ProductModel.IsLowStock" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+					<label class="form-check-label" asp-for="ProductModel.IsLowStock"></label>
+					<span asp-validation-for="ProductModel.IsLowStock" class="text-danger"></span>
+					</div>
+					</div>
+					<div class="mb-3">
+					<button type="submit" class="btn btn-info" style="width:150px">Update</button>
+					<a asp-controller="ProductModel" asp-action="Index" class="btn btn-secondary" style="width:150px">
+					Back to List
+					</a>
+					</div>
+					</div>
+					*@
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+
+	
+}
+
+
+

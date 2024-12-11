@@ -1,0 +1,47 @@
+﻿
+
+@model IEnumerable<Supplier>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="py-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Supplier List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Suppliers" asp-action="Upsert" class="btn-info btn btn-sm">
+                <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Supplier
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped table-sm" style="width:100%" id="SupplierTbl">
+    <thead class="bg-info">
+        <tr>
+          
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Receivable</th>
+            <th>Paid</th>
+            <th>Purchase Due</th>
+            <th>Wallet Balance</th>
+            <th>Total Due</th>
+            <th>Action</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
+
+</table>
+
+@section Scripts{
+    <script src="~/js/Supplier/supplier.js"> </script>
+
+}

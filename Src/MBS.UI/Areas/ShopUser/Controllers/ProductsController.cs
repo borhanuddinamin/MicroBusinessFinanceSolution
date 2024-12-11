@@ -1,0 +1,285 @@
+﻿
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using MBS.DAL.Repository;
+using MBS.DAL.Repository.IRpository;
+using MBS.Models.AppVM;
+using MBS.Models.EntityModel;
+using System.Text;
+using System.Drawing;
+using System.Data.Common;
+
+
+namespace MBS.UI.Areas.ShopUser.Controllers
+{
+    [Area("ShopUser")]
+    public class ProductsController : Controller
+    {
+        private readonly IWebHostEnvironment _webHost;
+        private IUnitOfWork _unitOfWork;
+        public ProductsController(IWebHostEnvironment webHost, IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+            _webHost = webHost;
+        }
+        public IActionResult Index()
+        {
+
+
+            ViewBag.CategoryList = new SelectList(_unitOfWork.Category.GetAll(), "Id", "Name");
+            ViewBag.BrandList = new SelectList(_unitOfWork.Brand.GetAll(), "Id", "Name");
+            return View();
+        }
+
+        //Get
+        public IActionResult Upsert(int? id)
+        {
+
+
+            // category item for dropdown
+            List<Category> categoryList = new List<Category>();
+
+
+
+            List<Unit> unitList = new List<Unit>();
+            List<Brand> brandList = new List<Brand>();
+            List<Division> divisionList = new List<Division>();
+
+
+            categoryList = _unitOfWork.Category.GetAll().ToList();
+            unitList = _unitOfWork.Unit.GetAll().ToList();
+            brandList = _unitOfWork.Brand.GetAll().ToList();
+            divisionList = _unitOfWork.Division.GetAll().ToList();
+
+            ProductVM productVM = new()
+            {
+                Product = new(),
+                CategoryList = categoryList.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+                UnitList = unitList.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+                BrandList = brandList.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+                DivisionList = divisionList.Select(i => new SelectListItem
+                {
+                    Text = i.Division_EngName,
+                    Value = i.Id.ToString()
+                }),
+
+            };
+
+            if (id == null || id == 0)
+            {
+                //create product
+                return View(productVM);
+            }
+
+
+            else
+            {
+                //update 
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(i => i.Id == id);
+                return View(productVM);
+
+            }
+
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ProductVM obj, IFormFile? file)
+        {
+
+            //var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            if (ModelState.IsValid)
+            {
+                var model = new Product();
+                model = obj.Product;
+                var relatedBy = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == model.UnitId).RelatedBy;
+                if (model.UnitId != 0)
+                {
+                    if (model.SubUnitId != 0)
+                    {
+                    }
+
+                }
+
+
+                string mmRoot = _webHost.WebRootPath;
+
+
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    string filePath = Path.Combine(mmRoot, @"img\ProductImages");
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+                    var fileExtention = file.FileName;
+                    if (obj.Product.ImageUrl != null)
+                    {
+                        string oldPath = Path.Combine(mmRoot, obj.Product.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldPath))
+                        {
+                            System.IO.File.Delete(oldPath);
+                        }
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(filePath, fileName + fileExtention), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    model.ImageUrl = @"\img\ProductImages\" + fileName + fileExtention;
+                }
+                if (obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(model);
+                    _unitOfWork.Save();
+
+                    //stock
+                    var stock = new Stock();
+                    stock.ProductId = model.Id;
+                    if (model.UnitId != null)
+                    {
+                        stock.UnitId = Convert.ToInt32(model.UnitId);
+
+                    }
+                    stock.StockQuantity = 0;
+                    _unitOfWork.Stock.Add(stock);
+                    _unitOfWork.Save();
+
+
+
+                    //productMODLE
+
+                    var productModel = new ProductModel();
+                    productModel.ProductId = model.Id;
+                    productModel.IsActive = true;
+                    _unitOfWork.ProductModel.Add(productModel);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Unit Created Succesfully!";
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(model);
+                    _unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+
+            }
+            return View(obj);
+        }
+
+        //public IActionResult GenerateBarcode(int productId)
+        //{
+        //    var productcode = _unitOfWork.Product.GetFirstOrDefault(f => f.Id == productId).Code;
+        //    Barcode barcode = new Barcode();
+        //    var text = productcode;
+        //    Image barcodeImg = barcode.Encode(BarcodeLib.TYPE.CODE128, text, Color.Black, Color.White, 250, 100);
+        //    var data = ConvertImageToBytes(barcodeImg);
+        //      var file = File(data, "image/jpeg");
+        //    return file;
+        //}
+
+
+        // private byte[] ConvertImageToBytes(Image barcodeImg)
+        //{
+        //    using (MemoryStream ms = new MemoryStream())
+        //    {
+        //        barcodeImg.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+        //        return ms.ToArray();
+
+
+        //    }
+        //}
+
+
+        //API CALLS
+        #region API Calles
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+
+            var itemVm = _unitOfWork.Product.GetAll();
+            foreach (var item in itemVm)
+            {
+                item.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == item.CategoryId);
+                item.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == item.BrandId);
+                item.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == item.UnitId);
+            }
+            return Json(new { data = itemVm });
+        }
+        public IActionResult GetById(int id)
+
+        {
+
+            var product = _unitOfWork.Product.GetFirstOrDefault(x => x.Id == id);
+            product.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == product.CategoryId);
+            product.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == product.BrandId);
+            product.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.UnitId);
+
+            var productVm = new ProductVM();
+            productVm.Product = product;
+
+            productVm.SubUnit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.SubUnitId);
+            return Json(new { data = productVm });
+
+        }
+        [HttpGet]
+        public IActionResult GetByCode(string id)
+
+        {
+
+            var product = _unitOfWork.Product.GetFirstOrDefault(x => x.Code == id);
+            product.Category = _unitOfWork.Category.GetFirstOrDefault(f => f.Id == product.CategoryId);
+            product.Brand = _unitOfWork.Brand.GetFirstOrDefault(f => f.Id == product.BrandId);
+            product.Unit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.UnitId);
+
+            var productVm = new ProductVM();
+            productVm.Product = product;
+
+            productVm.SubUnit = _unitOfWork.Unit.GetFirstOrDefault(f => f.Id == product.SubUnitId);
+            return Json(new { data = productVm });
+
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int? id)
+        {
+
+            var product = _unitOfWork.Product.GetFirstOrDefault(f => f.Id == id);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Error while Deleting" });
+            }
+
+            _unitOfWork.Product.Remove(product);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Deleted Successfully!" });
+        }
+        #endregion
+    }
+}

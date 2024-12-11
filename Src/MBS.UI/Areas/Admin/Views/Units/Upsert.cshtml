@@ -1,0 +1,82 @@
+﻿
+@model UnitVM
+@{
+    ViewData["Title"] = "Create";
+}
+ 
+<div p-3">
+    <div class="row">
+        <div class="col-md-12 ">
+           
+            <form class="" asp-action="Upsert" method="post">
+             
+                <div class="border mt-4 p-3">
+                    <div class="row pb-2">
+                        <h2 class="text-info">Create Unit</h2>
+                        <hr />
+                
+                    </div>
+                
+                    <input hidden asp-for="Unit.Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Unit.Name"></label>
+                        <input asp-for="Unit.Name" class="form-control" />
+                        <span asp-validation-for="Unit.Name" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+
+                  
+                <div class="col-md-4">
+                         <div class="mb-3">
+                        <label asp-for="Unit.RelatedUnitId"></label>
+                                <select asp-for="Unit.RelatedUnitId" class="form-select unitChange" asp-items="@Model.UnitList" >
+                             <option selected="selected" value="">Select Unit</option>
+                         </select>
+                    </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label asp-for="Unit.Operator"></label>
+                                <select asp-for="Unit.Operator" class="form-select opratorChange">
+                             <option selected="selected" value="">Select Oprator Sign</option>
+                                    <option value="*">(*)Multiply Operator</option>
+                         </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                        <label asp-for="Unit.RelatedBy"></label>
+                        <input asp-for="Unit.RelatedBy" class="form-control" />
+                        <span asp-validation-for="Unit.RelatedBy" class="text-danger"></span>
+                    </div>
+                    </div>
+                    </div>
+
+                    <div class="mb-2 text-center unit-count" style="display:none">
+                        <label for="">1= </label>
+                       
+                    </div>
+                     
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-info" style="width:150px">Submit</button>
+                        <a asp-controller="Units" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+    {
+  
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+      
+    }
+    <script src="~/js/Unit/unit.js"></script>
+}
+
+

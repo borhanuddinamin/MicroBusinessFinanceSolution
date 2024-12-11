@@ -1,0 +1,29 @@
+﻿@model RoleUpsertVM
+@{
+    ViewData["Title"] = "CreateRole";
+}
+
+<div class="p-4">
+    <div class="">
+        <h3>Create Role</h3>
+        <hr />
+    </div>
+    <div class="my-3">
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="CreateRole" method="post">
+                    <div class="mb-3">
+                        <label class="control-label">Role Name</label>
+                        <input asp-for="IdentityRole.Name" class="form-control" />
+                        <span class="text-danger" asp-validation-for="IdentityRole.Name"></span>
+                    </div>
+                    <div class="mb-3">
+                       <button class="btn btn-success" type="submit">Create</button>
+                       <button class="btn btn-secondary" asp-action="RoleManage" type="button">Back to List</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

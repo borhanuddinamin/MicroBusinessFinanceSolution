@@ -1,0 +1,41 @@
+﻿@using MBS.Models.EntityModel
+
+@model IEnumerable<Brand>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class=" py-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Brand List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Brands" asp-action="Upsert" class="btn-info btn btn-sm">
+                <i class="fa-solid fa-square-plus"></i> &nbsp; Create New Brand
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<table class="table table-bordered table-striped table-sm" style="width:100%" id="brandTbl">
+    <thead class="bg-info">
+        <tr>
+        
+            <th>Brand</th>
+            <th>Description</th>
+            <th>Logo</th>
+            <th>Count Products</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
+
+</table>
+
+@section Scripts{
+    <script src="~/js/Brand/brand.js"> </script>
+
+}

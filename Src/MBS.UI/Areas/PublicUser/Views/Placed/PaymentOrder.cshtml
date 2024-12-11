@@ -1,0 +1,214 @@
+﻿@model PlaceOrderPaymentTotalVM
+@{
+    ViewData["Title"] = "PaymentOrder";
+}
+
+<link rel="stylesheet" href="~/css/paymentMethod.css" />
+<div class="container">
+    <div class="payment-section bg-light">
+        <h3>Payment Method</h3>
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="d-flex  align-items-center">
+                    <div class="card p-3 shadow" style="max-width: 600px;">
+
+                        <nav>
+                            <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                                <a class="nav-link active " href="#" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                                    <img class="bank-img" src="~/images/payment/dabit-card.png" alt="">
+                                    <p class="bank-text text-center">Visa</p>
+                                </a>
+                                <a class="nav-link" href="#" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                    <img class="bank-img" src="~/images/payment/nagad.png" alt="">
+                                    <p class="bank-text text-center">Nagad</p>
+                                </a>
+                                <a class="nav-link" href="#" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">
+                                    <img class="bank-img" src="~/images/payment/bikash.png" alt="">
+                                    <p class="bank-text text-center">Bkash</p>
+                                </a>
+                                <a class="nav-link" href="#" id="nav-contact2-tab" data-bs-toggle="tab" data-bs-target="#nav-contact2" role="tab" aria-controls="nav-contact2" aria-selected="false">
+                                    <img class="bank-img" src="~/images/payment/cash.png" alt="">
+                                    <p class="bank-text text-center">Cash on</p>
+                                </a>
+                            </div>
+                        </nav>
+
+
+                        <div class="tab-content p-3 border bg-light" id="nav-tabContent">
+                            <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="pay-method-wrap-content pay-method-wrap-content-border">
+                                    <div class="clearfix">
+                                        <div class="wrap-add-card">
+                                            <div class="img-list">
+                                                <img src="https://laz-img-cdn.alicdn.com/tfs/TB1RI0cbLDH8KJjy1XcXXcpdXXa-80-80.png" class="bank-img" data-spm-anchor-id="a2o42.payment_page.0.i12.35b12829OdFUX3">
+                                                <img src="https://laz-img-cdn.alicdn.com/tfs/TB1sH7_bxrI8KJjy0FpXXb5hVXa-80-80.png" class="bank-img">
+                                                <img src="https://laz-img-cdn.alicdn.com/tfs/TB1A5YFocLJ8KJjy0FnXXcFDpXa-80-80.png" class="bank-img">
+                                            </div>
+                                            <div class="pLevel16">
+                                                <form class="next-form next-form-top ver next-form-large">
+                                                    <div class="card-number-row">
+                                                        <div class="next-form-item has-error field-label" label="Card number">
+                                                            <label for="creditCard" required="" class="next-col-16 next-form-item-label">Card number</label>
+                                                            <div class="next-form-item-control">
+                                                                <span class="next-input next-input-single next-input-large automation-input-new-card-number">
+                                                                    <input type="text" placeholder="Card number" data-meta="Field" id="creditCard" maxlength="19" height="100%" value="" data-spm-anchor-id="a2o42.payment_page.0.i13.35b12829OdFUX3">
+                                                                </span>
+                                                                <div class="next-form-item-explain">Please input right value!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-type">
+                                                        </div>
+                                                    </div>
+                                                    <div class="next-form-item field-label" label="Name on card">
+                                                        <label for="cardName" required="" class="next-col-16 next-form-item-label">Name on card</label>
+                                                        <div class="next-form-item-control">
+                                                            <span class="next-input next-input-single next-input-large clear automation-input-new-card-name">
+                                                                <input type="text" placeholder="Name on card" data-meta="Field" id="cardName" height="100%" value="">
+                                                            </span>
+                                                            <div class="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pt-5 pb-3">
+                                                        <div class="col-md-8">
+                                                            <div class="next-form-item field-label expiry-date" label="Expiry date">
+                                                                <label for="expiryDate" required="" class="next-col-16 next-form-item-label">Expiry date</label>
+                                                                <div class="next-form-item-control">
+                                                                    <span class="next-input next-input-single next-input-large clear automation-input-new-card-expire-date">
+                                                                        <input type="text" placeholder="MM/YY" data-meta="Field" id="expiryDate" maxlength="5" height="100%" value="">
+                                                                    </span>
+                                                                    <div class="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 cvv">
+                                                            <div class="next-form-item field-label" label="CVV">
+                                                                <label for="cvv" required="" class="next-col-16 next-form-item-label">CVV</label>
+                                                                <div class="next-form-item-control">
+                                                                    <span class="next-input next-input-single next-input-large clear automation-input-new-card-cvv">
+                                                                        <input type="text" placeholder="CVV" data-meta="Field" id="cvv" maxlength="4" height="100%" value="">
+                                                                    </span>
+                                                                    <div class="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="cvv-icon-wrap">
+                                                                <span>
+                                                                    <span class="lazada lazada-ic-Tooltip lazada-icon help-icon"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="content py-4">
+                                                <div class="col1">
+                                                    <label class="next-checkbox checkbox-elem checked ">
+                                                        <span class="next-checkbox-inner"><i class="next-icon next-icon-select next-icon-xs"></i></span>
+                                                        <input type="checkbox" id="automation-checkbox-save-card" aria-checked="true" checked="">
+                                                    </label>
+                                                </div>
+                                                <div class="col2">
+                                                    <div class="title">Save Card</div>
+                                                    <div class="subtitle">We will save this card for your convenience. If required, you can remove the card in the "Payment Options" section in the "Account" menu.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-place-order-wrap ">
+                                        <button type="button" class="next-btn next-btn-primary next-btn-large automation-btn-place-order btn-place-order ">Pay Now</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="pay-method-wrap-content pay-method-wrap-content-border">
+                                    <div class="clearfix">
+                                        <div class="instruction-wrap">
+                                            <div class="content">
+                                                <span class="title" data-spm-anchor-id="a2o42.payment_page.0.i16.35b12829OdFUX3">
+                                                    Please ensure the following before you proce:
+                                                    1. You have an activated Nagad Account
+                                                    2. You are able to receive an OTP on your registered Mobile Number.
+                                                    3. You have sufficient balance in your account to carry out the transaction
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div><div class="btn-place-order-wrap "><button type="button" class="next-btn next-btn-primary next-btn-large automation-btn-place-order btn-place-order ">Pay Now</button></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="pay-method-wrap-content pay-method-wrap-content-border">
+                                    <div class="clearfix">
+                                        <div class="instruction-wrap">
+                                            <div class="content">
+                                                <span class="title" data-spm-anchor-id="a2o42.payment_page.0.i16.35b12829OdFUX3">
+                                                    1) Users paying with bkash for the first time: Enter bKash Wallet Number and OTP for successful account saving.
+                                                    2) For all subsequent users: Enter PIN to make payment
+
+                                                    Disclaimer: you will be redirected back to Checkout for first transaction to complete payment
+
+                                                    Please Note
+                                                    1. You have an activated bKash account
+                                                    2. Ensure you have sufficient balance in your bKash account to cover the total cost of the order
+                                                    3. Ensure you are able to receive your OTP (one-time-password) on your mobile and have bKash PIN
+
+                                                    ***Please note that one bkash account can only be saved in one Daraz account.***
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div><div class="btn-place-order-wrap "><button type="button" class="next-btn next-btn-primary next-btn-large automation-btn-place-order btn-place-order ">Pay Now</button></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="nav-contact2-tab">
+                                <div class="pay-method-wrap-content pay-method-wrap-content-border">
+                                    <div class="clearfix">
+                                        <div class="instruction-wrap">
+                                            <div class="content">
+                                                <span class="title" data-spm-anchor-id="a2o42.payment_page.0.i17.35b12829OdFUX3">
+                                                    - You may pay in cash to our courier upon receiving your parcel at the doorstep
+
+                                                    - Before agreeing to receive the parcel, check if your delivery status has been updated to 'Out for Delivery'
+
+                                                    - Before receiving, confirm that the airway bill shows that the parcel is from Daraz
+
+                                                    - Before you make payment to the courier, confirm your order number, sender information and tracking number on the parcel
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div><div class="btn-place-order-wrap "><button type="button" class="next-btn next-btn-primary next-btn-large automation-btn-place-order btn-place-order ">Confirm Order</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="summary bg-white">
+                    <h3 class="h5">Order Summary</h3>
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p>Subtotal(@Model.Qty items and shipping fee included)</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p>@Model.Totall</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p class="h6">Total Amount</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p>@Model.Totall</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

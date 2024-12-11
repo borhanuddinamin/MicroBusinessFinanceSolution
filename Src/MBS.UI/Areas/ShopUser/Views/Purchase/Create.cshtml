@@ -1,0 +1,260 @@
+﻿
+
+@model PurchaseVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="p-3 bg-white">
+    <div class="row">
+        <div class="col-md-12 ">
+           
+         
+                <div class="border mt-4 p-3">
+                    <div class="row pb-2">
+                        <div class="col-md-12">
+                            <h4 class="card-title" style="display: inline-block">Create Purchase</h4>
+                            <p class="text-end">
+                            <a href="" class="edit btn btn-outline btn-info float-right mt-2" data-bs-toggle="modal" data-bs-target="#addSupplier" style="margin-left: 30px;">Add Supplier</a>
+                        </p>
+                       
+                        </div>
+                      
+                    </div>
+                    <hr class="height:3px">
+                <form asp-action="CreatePurchase" method="post">
+                                
+                     <div class="row"> 
+                                  <div class="mb-3 col-md-6">
+                                            <label>Supplier</label>
+                                          <select class="form-control basic-select2" name="Purchase.SupplierId"  asp-items="@Model.SupplierList" id="SupplierList">
+                                <option selected value="">Select Supplier</option>
+                                            </select> 
+                                </div>
+                                 <div class="mb-3 col-md-6">
+                                    <label>Purchase Date</label>
+                            <input type="text" class="form-control " id="getCurrentDate"  />
+
+                                </div>
+                                  <div class="mb-3 col-md-6">
+                                       <label>Product</label>
+                                          <select class="form-control basic-select2"  asp-items="@Model.ProductList" id="ProductList">
+                                                <option selected value="">Select Product</option>
+                                            </select> 
+                                </div>
+                                    
+                            </div>
+                            <hr class="height:3px">
+                            <div class="row">
+        <table class="table table-bordered" id="purchaseProduct">
+          <thead>
+            <tr class="bg-info">
+              <th style="width:80px">#SL</th>
+              <th>Product</th>
+              <th>Rate</th>
+              <th style="width:320px;">Qty</th>
+              <th>Sub Total</th>
+              <th style="width:50px">
+                <i class="fa fa-trash"></i>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody id="table_body">
+
+          
+            
+        </tbody>
+          <tfoot class="bg-light">
+            <tr>
+              <td colspan="4"></td>
+              
+              <td colspan="2">
+                <strong>Grand Total: <span id="grandTotalTxt">0</span> Tk <input type="hidden" value="0" name="Purchase.GrandTotal" id="PurchaseGrandTotal"  /> </strong>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12 mt-4">
+                            <button type="button" class="btn btn-info mx-auto" data-bs-toggle="modal" data-bs-target="#paymentForm" >
+            <i class="fa fa-money"></i>
+            Payment
+          </button>
+        </div>
+      </div>
+
+
+      
+<div class="modal fade" id="paymentForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <table class="table table-bordered text-left">
+                        <tbody>
+                            <tr>
+                                <td width="50%">
+                                    <strong class="float-left">Paying Items: </strong>
+                                    <strong class="float-right">(<span id="items"></span>)</strong>
+                                </td>
+                                <td>
+                                    <strong class="float-left">Total Payable: </strong>
+                                    <strong class="float-right">(<span id="totalPayable">0</span> Tk)</strong>
+                                    <input type="hidden"  id="totalPayable_input" value="0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong class="float-left pl-3">Due</strong>
+                                    <strong class="float-right pr-3">
+                                        (<span id="due_txt"></span> Tk)
+                                    </strong>
+                                    <input type="hidden" id="due_input" name="Purchase.Due" value="">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label for="note">Note</label>
+                            <textarea name="Purchase.Note" class="form-control" placeholder="Enter Note (Optional) "></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                      
+
+                        <div class="form-group col-md-6">
+                            <label for="pay_amount">Pay Amount</label>
+                            <div class="input-group">
+                                <input type="number" step="any" class="form-control" name="Purchase.Paid" id="pay_amount" placeholder="Pay Amount...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning" type="button" onclick="SetPaidAmount()" id="paid_btn">PAID!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-info">PURCHASE</button>
+              
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                                </form>
+                               
+                </div>
+                
+        </div>
+    </div>
+
+</div>
+
+
+
+@*add supplier form*@
+
+<div class="modal fade" id="addSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Supplier</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="supplierForm">
+                    <div >
+                        
+
+                      
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Supplier.SupplierName"></label>
+                                    <input asp-for="Supplier.SupplierName" id="supplierName" class="form-control" />
+                                    <span asp-validation-for="Supplier.SupplierName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Supplier.Email"></label>
+                                    <input asp-for="Supplier.Email" id="supplierEmail" class="form-control" />
+                                    <span asp-validation-for="Supplier.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Supplier.Address"></label>
+                                    <textarea asp-for="Supplier.Address" id="supplierAddress" class="form-control"></textarea>
+                                    <span asp-validation-for="Supplier.Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Supplier.Phone"></label>
+                                    <input asp-for="Supplier.Phone" id="supplierPhone" class="form-control" />
+                                    <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Supplier.OpeningReceivable"></label>
+                                    <input asp-for="Supplier.OpeningReceivable" id="openeingReceivable" class="form-control" />
+                                    <span asp-validation-for="Supplier.OpeningReceivable" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Supplier.OpeningPayable"></label>
+                                    <input asp-for="Supplier.OpeningPayable" id="openeingPayable" class="form-control" />
+                                    <span asp-validation-for="Supplier.OpeningPayable" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-2 text-center unit-count" style="display:none">
+                            <label for="">1= </label>
+
+                        </div>
+
+                      
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onclick="SaveSupplier()" class="btn btn-info">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+    {
+  
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+      
+    }
+    <script src="~/js/Purchase/purchaseCreate.js"></script>
+}
