@@ -35,11 +35,13 @@ namespace MBS.DAL.Data
 
             //Create User
 
-            const string _userName = "sa";
-            const string _firstName = "Shamsul";
-            const string _lastName = "Arifin";
+            const string _userName = "ba";
+            const string _firstName = "Borhan";
+            const string _lastName = "Uddin";
             const string _password = "555555";
             const string _email = "admin@gmail.com";
+            
+            
            
             _userName.Trim();
             _password.Trim();
@@ -60,6 +62,7 @@ namespace MBS.DAL.Data
                 appUser.UserName = _userName;
                 appUser.Email = _email;
                 appUser.EmailConfirmed = true;
+          
               
 
                 //    //_userManager = new UserManager<AppUser>();

@@ -78,5 +78,32 @@ namespace MBS.UI.Areas.PublicUser.Controllers
             var item=_unitOfWork.Product.GetFirstOrDefault(x=>x.Id == id);
             return Json(new { data = item });
         }
+
+
+        [HttpGet]
+        public ActionResult GetAllDivision()
+        {
+
+
+            var item = _unitOfWork.UserDivision.GetAll();
+            return Json(new { data = item });
+        }
+
+        //GetAllDistrictById
+        [HttpGet]
+        public ActionResult GetAllDistrictById(int id)
+        {
+
+            var item = _unitOfWork.District.GetAllById(x=>x.DivisionId==id);
+            return Json(new { data = item });
+        }
+
+        [HttpGet]
+        public ActionResult GetAllSubDistrictById(int id)
+        {
+
+            var item = _unitOfWork.SubDistrict.GetAllById(x => x.DistrictId == id);
+            return Json(new { data = item });
+        }
     }
 }

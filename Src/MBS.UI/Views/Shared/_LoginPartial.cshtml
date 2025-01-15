@@ -8,6 +8,10 @@
 {
     bool isSuperAdmin = User.IsInRole("Super Admin");
     bool isAdmin = User.IsInRole("Admin");
+    bool isSimpleUser = User.IsInRole("SimpleUser");
+    bool isServiceProvider = User.IsInRole("ServiceProvider");
+    bool isRetailer = User.IsInRole("Retailer");
+    bool isSupplier = User.IsInRole("Supplier");
 
     <div class="dropdown">
         <button style="background:#318781" class="btn  dropdown-toggle text-warning" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,11 +28,21 @@
                     <a id="manage" class="dropdown-item text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboared</a>
                 </li>
             }
-            @if (isAdmin == true)
+            @if (isSimpleUser == true)
             {
                 <li class="nav-item">
                     <a id="manage" class="dropdown-item text-dark" asp-area="ShopUser" asp-controller="Home" asp-action="Index">Dashboared</a>
                 </li>
+            }
+            @if (isServiceProvider == true)
+            {
+                <li class="nav-item">
+                    <a id="manage" class="dropdown-item text-dark" asp-area="ServiceProvider" asp-controller="Home" asp-action="Index">Dashboared</a>
+                </li>
+            }
+            @if (isSimpleUser == true)
+            {
+              
             }
             <li class="nav-item">
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

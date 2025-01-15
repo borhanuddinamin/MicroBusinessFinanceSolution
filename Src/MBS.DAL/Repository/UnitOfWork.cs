@@ -28,6 +28,10 @@ namespace MBS.DAL.Repository
             ProductModel = new ProductModelRepository(_db);
             PurchaseInvoice = new PurchaseInvoiceRepository(_db);
             Division = new DivisionRepository(_db);
+            UserDivision = new UserDivisionRepository(_db);
+            District = new DistrictRepository(_db);
+            SubDistrict = new SubDistrictRepository(_db);
+            Location = new LocationRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -42,6 +46,10 @@ namespace MBS.DAL.Repository
         public IProductModelRepository ProductModel { get; private set; }
         public IPurchaseInvoiceRepository PurchaseInvoice { get; private set; }
         public IDivisionRepository Division { get; private set; }
+        public IUserDivisionRepository UserDivision { get; private set; }
+        public IDistrictRepository District { get; private set; }
+        public ISubDistrictRepository SubDistrict { get; private set; }
+        public ILocationRepository Location { get; private set; }
       
 
         public void Save()

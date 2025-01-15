@@ -40,8 +40,9 @@ namespace MBS.DAL.Repository
                 {
                     query = query.Include(inclueprop);
                 }
+                query = query.Where(filter);
             }
-            query = query.Where(filter);
+            
             return query.ToList();
         }
 

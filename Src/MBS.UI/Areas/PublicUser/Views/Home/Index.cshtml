@@ -89,7 +89,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row">
-                            @foreach (var item in Model.CategoryList)
+                            @foreach (var item in Model?.CategoryList)
                             {
                                 <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.1s">
                                     <div class="card">
@@ -379,24 +379,24 @@
                     <div class="carousel-item active">
                         <div class="row ps-4 pb-5">
 
-                            @foreach (var item in Model.ActiveProductList)
+                            @foreach (var item in Model?.ActiveProductList)
                             {
                                 <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
                                     <div class="product-item">
-                                        <img src="@item.Product.ImageUrl" class="img-responsive" width="255" height="322" alt="">
-                                        <p>@item.Product.Name</p>
+                                        <img src="@item?.Product?.ImageUrl" class="img-responsive" width="255" height="322" alt="">
+                                        <p>@item.?Product?.Name</p>
                                         <div class="product-hover">
                                             <div class="product-meta">
 
                                                 <a href="#"><i class="fa-regular fa-eye"></i></a>
 
-                                                <a href="#" data-id="@item.Product.Id" class="add-cart-btn"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                                <a href="#" data-id="@item?.Product?.Id" class="add-cart-btn"><i class="pe-7s-cart"></i>Add to Cart</a>
                                             </div>
                                         </div>
                                         <div class="product-title">
 
 
-                                            <p>Price <span class="ps-2">৳ @item.Product.SalePrice</span></p>
+                                            <p>Price <span class="ps-2">৳ @item?.Product?.SalePrice</span></p>
 
                                         </div>
                                     </div>
@@ -453,12 +453,12 @@
                     <div class="carousel-item active">
 
                         <div class="row ps-4 pb-5">
-                            @foreach (var item in Model.LatestProductList)
+                            @foreach (var item in Model?.LatestProductList)
                             {
                                 <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.2s">
                                     <div class="product-item">
-                                        <img src="@item.Product.ImageUrl" class="img-responsive" width="255" height="322" alt="">
-                                        <p>@item.Product.Name</p>
+                                        <img src="@item?.Product?.ImageUrl" class="img-responsive" width="255" height="322" alt="">
+                                        <p>@item?.Product?.Name</p>
                                         <div class="product-hover">
                                             <div class="product-meta">
 
@@ -470,7 +470,7 @@
                                         <div class="product-title">
 
 
-                                            <p>Price <span class="ps-2">৳ @item.Product.SalePrice</span></p>
+                                            <p>Price <span class="ps-2">৳ @item?.Product?.SalePrice</span></p>
 
                                         </div>
                                     </div>
@@ -642,36 +642,4 @@
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Your Cart</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <table class="show-cart table">
-                        <!-- Cart items will be dynamically added here -->
-                    </table>
-                    <div class="grand-total">Total price: ৳<span class="total-cart"></span></div>
-
-                    <div class="my-2">
-
-                        <a onclick="redirectToPage()" class="btn btn-dark d-block"> Place Order</a>
-                        @*   <a  class="btn btn-dark d-block"> Clear Order</a> *@
-                        <!-- <button type="button" class="btn btn-danger clear-all">Clear All</button> -->
-
-                    </div>
-                </div>
-                @*    <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-danger clear-all">Clear All</button> -->
-                </div> *@
-            </div>
-        </div>
-    </div>
-
-</div>
 

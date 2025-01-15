@@ -20,6 +20,10 @@ namespace MBS.DAL.Repository.IRpository
         public IProductModelRepository ProductModel { get;}
         public IPurchaseInvoiceRepository PurchaseInvoice { get;}
         public IDivisionRepository Division { get;}
+        public IUserDivisionRepository UserDivision { get;}
+        public IDistrictRepository District { get;}
+        public ISubDistrictRepository SubDistrict { get;}
+        public ILocationRepository Location { get;}
       
         void Save();
     }

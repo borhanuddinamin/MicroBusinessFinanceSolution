@@ -1,0 +1,297 @@
+﻿
+@{
+    ViewData["Title"] = "agent";
+}
+<style>
+    .card-img, .card-img-bottom, .card-img-top {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+    }
+
+    .banner img {
+        width: 100%;
+    }
+
+    .peyment-img img {
+        width: 45px;
+    }
+
+    .modal-footer {
+        border-top: none !important;
+    }
+
+    .modal-header {
+        border-bottom: none;
+    }
+    /* .peyment-img {
+        border: 1px solid;
+        width: 110px;
+        border-radius: 5px;
+        height: 55px;
+    } */
+    .payment-design img {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+    }
+
+    .modal-body {
+        border: 1px solid #dee2e6;
+        margin: 0px 13px;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+        .modal-body:hover {
+            border: 1px solid #000;
+        }
+
+    .payment-area {
+    }
+</style>
+<main class="container">
+    <!-- card area -->
+    <div class="mt-5">
+        <h2 class="text-center pb-2">Available Service In This Area</h2>
+        <div class="d-flex justify-content-evenly flex-wrap">
+            <div>
+                <div class="card mt-4" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img src="~/img/AgentCover/pic1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">শপ মার্কেটিং</h5>
+                        <p class="card-text">ডিজিটাল মার্কেটিং কোর্সে শিখুন SEO, Social Media Marketing, Google Ads ইত্যাদি। প্রফেশনাল প্রশিক্ষণ ও বাস্তব প্রজেক্টের মাধ্যমে দক্ষতা অর্জন করে সফল ক্যারিয়ার গড়ুন।</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+
+                <!-- (Popup) -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title " id="exampleModalLabel">Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body payment-design d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="~/img/AgentCover/pic1.jpg" alt="">
+                                    <p class="ps-3">শপ <br> মার্কেটিং</p>
+                                </div>
+                                <div>
+                                    <p>15000 ৳  <del class="ps-2">25000 ৳</del></p>
+                                </div>
+
+                            </div>
+
+                            <div class="payment-area">
+                                <p class="text-center pt-3">chose your payment option</p>
+                                <div class="modal-footer d-flex justify-content-center pb-4">
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/bikash.png" alt=""></a>
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/nogod.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card mt-4" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#exampleModal-2">
+                    <img src="~/img/AgentCover/pic2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">পেজ মার্কেটিং</h5>
+                        <p class="card-text">ডিজিটাল মার্কেটিং কোর্সে শিখুন SEO, Social Media Marketing, Google Ads ইত্যাদি। প্রফেশনাল প্রশিক্ষণ ও বাস্তব প্রজেক্টের মাধ্যমে দক্ষতা অর্জন করে সফল ক্যারিয়ার গড়ুন।</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+
+                <!-- (Popup) -->
+                <div class="modal fade" id="exampleModal-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title " id="exampleModalLabel">Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body payment-design d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="~/img/AgentCover/pic2.jpg" alt="">
+                                    <p class="ps-3">পেজ <br> মার্কেটিং</p>
+                                </div>
+                                <div>
+                                    <p>15000 ৳  <del class="ps-2">25000 ৳</del></p>
+                                </div>
+                            </div>
+                            <div class="payment-area">
+                                <p class="text-center pt-3">chose your payment option</p>
+                                <div class="modal-footer d-flex justify-content-center pb-4">
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/bikash.png" alt=""></a>
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/nogod.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card mt-4" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#exampleModal-3">
+                    <img src="~/img/AgentCover/pic3.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">পণ্য মার্কেটিং</h5>
+                        <p class="card-text">ডিজিটাল মার্কেটিং কোর্সে শিখুন SEO, Social Media Marketing, Google Ads ইত্যাদি। প্রফেশনাল প্রশিক্ষণ ও বাস্তব প্রজেক্টের মাধ্যমে দক্ষতা অর্জন করে সফল ক্যারিয়ার গড়ুন।</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+
+                <!-- (Popup) -->
+                <div class="modal fade" id="exampleModal-3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title " id="exampleModalLabel">Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body payment-design d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="~/img/AgentCover/pic3.jpg" alt="">
+                                    <p class="ps-3">পণ্য <br> মার্কেটিং</p>
+                                </div>
+                                <div>
+                                    <p>15000 ৳  <del class="ps-2">25000 ৳</del></p>
+                                </div>
+                            </div>
+                            <div class="payment-area">
+                                <p class="text-center pt-3">chose your payment option</p>
+                                <div class="modal-footer d-flex justify-content-center pb-4">
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/bikash.png" alt=""></a>
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/nogod.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card mt-4" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#exampleModal-4">
+                    <img src="~/img/AgentCover/pic4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">এসইও মার্কেটিং</h5>
+                        <p class="card-text">ডিজিটাল মার্কেটিং কোর্সে শিখুন SEO, Social Media Marketing, Google Ads ইত্যাদি। প্রফেশনাল প্রশিক্ষণ ও বাস্তব প্রজেক্টের মাধ্যমে দক্ষতা অর্জন করে সফল ক্যারিয়ার গড়ুন।</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+
+                <!-- (Popup) -->
+                <div class="modal fade" id="exampleModal-4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title " id="exampleModalLabel">Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body payment-design d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="~/img/AgentCover/pic4.jpg" alt="">
+                                    <p class="ps-3">এসইও <br> মার্কেটিং</p>
+                                </div>
+                                <div>
+                                    <p>15000 ৳  <del class="ps-2">25000 ৳</del></p>
+                                </div>
+                            </div>
+                            <div class="payment-area">
+                                <p class="text-center pt-3">chose your payment option</p>
+                                <div class="modal-footer d-flex justify-content-center pb-4">
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/bikash.png" alt=""></a>
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/nogod.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card mt-4" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#exampleModal-5">
+                    <img src="~/img/AgentCover/pic5.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">কন্টেন্ট মার্কেটিং</h5>
+                        <p class="card-text">ডিজিটাল মার্কেটিং কোর্সে শিখুন SEO, Social Media Marketing, Google Ads ইত্যাদি। প্রফেশনাল প্রশিক্ষণ ও বাস্তব প্রজেক্টের মাধ্যমে দক্ষতা অর্জন করে সফল ক্যারিয়ার গড়ুন।</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+
+                <!-- (Popup) -->
+                <div class="modal fade" id="exampleModal-5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title " id="exampleModalLabel">Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body payment-design d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="~/img/AgentCover/pic5.jpg" alt="">
+                                    <p class="ps-3">কন্টেন্ট <br> মার্কেটিং</p>
+                                </div>
+                                <div>
+                                    <p>15000 ৳  <del class="ps-2">25000 ৳</del></p>
+                                </div>
+                            </div>
+                            <div class="payment-area">
+                                <p class="text-center pt-3">chose your payment option</p>
+                                <div class="modal-footer d-flex justify-content-center pb-4">
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/bikash.png" alt=""></a>
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/nogod.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card mt-4" style="width: 18rem;" data-bs-toggle="modal" data-bs-target="#exampleModal-6">
+                    <img src="~/img/AgentCover/pic6.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">সোশ্যাল মিডিয়া মার্কেটিং</h5>
+                        <p class="card-text">ডিজিটাল মার্কেটিং কোর্সে শিখুন SEO, Social Media Marketing, Google Ads ইত্যাদি। প্রফেশনাল প্রশিক্ষণ ও বাস্তব প্রজেক্টের মাধ্যমে দক্ষতা অর্জন করে সফল ক্যারিয়ার গড়ুন।</p>
+                        <a href="#" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+
+                <!-- (Popup) -->
+                <div class="modal fade" id="exampleModal-6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title " id="exampleModalLabel">Payment</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body payment-design d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <img src="~/img/AgentCover/pic6.png" alt="">
+                                    <p class="ps-3">সোশ্যাল মিডিয়া <br> মার্কেটিং</p>
+                                </div>
+                                <div>
+                                    <p>15000 ৳  <del class="ps-2">25000 ৳</del></p>
+                                </div>
+                            </div>
+                            <div class="payment-area">
+                                <p class="text-center pt-3">chose your payment option</p>
+                                <div class="modal-footer d-flex justify-content-center pb-4">
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/bikash.png" alt=""></a>
+                                    <a class="peyment-img" href="#"><img src="~/img/AgentCover/nogod.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</main>
+

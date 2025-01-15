@@ -33,4 +33,13 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\NewFolder\" />
+    <Folder Include="Areas\SimpleUser\Controllers\" />
+    <Folder Include="Areas\SimpleUser\Data\" />
+    <Folder Include="Areas\SimpleUser\Models\" />
+    <Folder Include="Areas\SimpleUser\Views\" />
+    <Folder Include="wwwroot\img\AgentCover\" />
+  </ItemGroup>
+
 </Project>

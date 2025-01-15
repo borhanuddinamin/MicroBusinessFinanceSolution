@@ -6,7 +6,6 @@
 @{
     var user = await UserManager.GetUserAsync(User);
     var roles = await UserManager.GetRolesAsync(user);
-    var test = "fgcg";
 }
 
 
@@ -44,7 +43,7 @@
 </head>
 <body>
 
-
+   
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -70,22 +69,20 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-
+                   
                     <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-
+                   
                     @* Ptoduct *@
                     
-                    @if (roles.Contains("Admin") | roles.Contains("SuperAdmin"))
-                    {
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a asp-area="ShopUser" asp-action="Upsert" asp-controller="Products" class="dropdown-item">Add Products</a>
-                                <a asp-area="ShopUser" asp-action="Index" asp-controller="Products" class="dropdown-item">Manage Products</a>
-                                <a asp-area="ShopUser" asp-action="Upsert" asp-controller="ProductModels" class="dropdown-item">Manage ProductModel</a>
-                            </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Product</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-area="ShopUser" asp-action="Upsert" asp-controller="Products" class="dropdown-item">Add Products</a>
+                            <a asp-area="ShopUser" asp-action="Index" asp-controller="Products" class="dropdown-item">Manage Products</a>
+                            <a asp-area="ShopUser" asp-action="Upsert" asp-controller="ProductModels" class="dropdown-item">Manage ProductModel</a>
                         </div>
-                    }
+                    </div>
+
                     @* Purchase *@
 
                     <div class="nav-item dropdown">
@@ -97,41 +94,37 @@
                         </div>
                     </div>
 
+                
 
 
+                  
 
-
-
-
+                  
 
 
                     @* Customers *@
-                    @if (roles.Contains("Admin") | roles.Contains("SuperAdmin"))
-                    {
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Customer</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a asp-area="ShopUser" asp-action="Upsert" asp-controller="Customers" class="dropdown-item">Add Customers</a>
-                                <a asp-area="ShopUser" asp-action="Index" asp-controller="Customers" class="dropdown-item">Manage Customers</a>
 
-                            </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Customer</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-area="ShopUser" asp-action="Upsert" asp-controller="Customers" class="dropdown-item">Add Customers</a>
+                            <a asp-area="ShopUser" asp-action="Index" asp-controller="Customers" class="dropdown-item">Manage Customers</a>
+
                         </div>
-                    }
-
+                    </div>
 
                     @* Suppliers *@
-                    @if (roles.Contains("Admin") | roles.Contains("SuperAdmin"))
-                    {
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Supplier</a>
-                            <div class="dropdown-menu bg-transparent border-0">
-                                <a asp-area="ShopUser" asp-action="Upsert" asp-controller="Suppliers" class="dropdown-item">Add Suppliers</a>
-                                <a asp-area="ShopUser" asp-action="Index" asp-controller="Suppliers" class="dropdown-item">Manage Suppliers</a>
 
-                            </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Supplier</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a asp-area="ShopUser" asp-action="Upsert" asp-controller="Suppliers" class="dropdown-item">Add Suppliers</a>
+                            <a asp-area="ShopUser" asp-action="Index" asp-controller="Suppliers" class="dropdown-item">Manage Suppliers</a>
+
                         </div>
-                    }
+                    </div>
 
+       
 
 
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
@@ -233,13 +226,24 @@
                             <img class="rounded-circle me-lg-2" src="~/_admin/img/user.jpg" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">@user.FirstName</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a asp-action="Index" asp-controller="Home" asp-area="PublicUser" class="dropdown-item">Back to site</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <img class="rounded-circle me-lg-2" src="~/_admin/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                <span class="d-none d-lg-inline-flex">@user.FirstName</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                                <a href="#" class="dropdown-item">My Profile</a>
+                                <a asp-action="Index" asp-controller="Home" asp-area="PublicUser" class="dropdown-item">Back to site</a>
+                                <a href="#" class="dropdown-item">Settings</a>
+                                <a href="#" class="dropdown-item text-danger" onclick="document.getElementById('logout-form').submit(); return false;">Log Out</a>
+
+                                <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display: none;">
+                                </form>
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
             </nav>
             <!-- Navbar End -->
@@ -260,7 +264,7 @@
                             &copy; <a href="#">MBS Team</a>, All Right Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
-
+                           
                             Distributed By <a class="border-bottom" href="" target="_blank">University Team</a>
                         </div>
                     </div>
@@ -272,15 +276,15 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+   
+  
 
 
 
 
 
 
-
-
-
+  
 
 
 
