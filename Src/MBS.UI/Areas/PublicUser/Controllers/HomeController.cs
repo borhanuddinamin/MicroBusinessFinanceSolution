@@ -78,6 +78,15 @@ namespace MBS.UI.Areas.PublicUser.Controllers
             var item=_unitOfWork.Product.GetFirstOrDefault(x=>x.Id == id);
             return Json(new { data = item });
         }
+        
+        [HttpGet]
+        public ActionResult GetProductById(int[] id)
+        {
+
+
+            var item=_unitOfWork.Product.GetFirstOrDefault(x=>x.Id == id);
+            return Json(new { data = item });
+        }
 
 
         [HttpGet]

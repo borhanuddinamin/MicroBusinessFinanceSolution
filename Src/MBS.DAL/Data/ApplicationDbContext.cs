@@ -36,6 +36,7 @@ namespace MBS.DAL.Data
         public DbSet<UserDivision> UserDivisions { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<SubDistrict> SubDistricts { get; set; }
+        public DbSet<ShippingAddress> ShippingAddress { get; set; }
         
         
 

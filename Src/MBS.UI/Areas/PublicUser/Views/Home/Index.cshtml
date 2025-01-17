@@ -1,14 +1,29 @@
-﻿
-@model HomePageVM
+﻿@model HomePageVM
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "B2B Wholesale Platform";
 }
 <style>
-    .hero-title{}
-   .hero-title .h2 {
-    color: #fff;
-    font-size: 40px;
-    text-transform: uppercase;
+    /* Base Styles */
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #f8cf07;
+            margin: 10px auto;
+        }
+
+    /* Hero Section */
+    .hero-title .h2 {
+        color: #fff;
+        font-size: 40px;
+        text-transform: uppercase;
     }
 
     .color-brandsecondary {
@@ -18,628 +33,424 @@
         font-weight: 900;
     }
 
-    .color-white{
-        color:#fff;
+    .color-white {
+        color: #fff;
     }
 
-    .hero-content{}
+    .bulk-price-table {
+        font-size: 14px;
+        margin-top: 10px;
+    }
 
-        .hero-content p {
-            font-size: 16px;
-            line-height: 28px;
+        .bulk-price-table td {
+            padding: 2px 8px;
+            border: 1px solid #ddd;
         }
 
-    .hero-product-container{}
+    .moq-badge {
+        background: #f8cf07;
+        color: #000;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-top: 5px;
+    }
 
-        .hero-product-container img {
-            display: inline-block !important;
-            width: 10% !important;
-            margin-right: 30px;
+    .product-meta {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .quantity-input {
+        width: 100px;
+        padding: 4px;
+        margin-right: 10px;
+    }
+
+    .color-brandsecondary {
+        font-size: 60px;
+        text-transform: uppercase;
+        color: #f8cf07;
+        font-weight: 900;
+    }
+
+    /* Product Cards */
+    .bulk-price-table {
+        font-size: 14px;
+        margin-top: 10px;
+        width: 100%;
+        background: #fff;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+        .bulk-price-table td {
+            padding: 6px 12px;
+            border: 1px solid #eee;
         }
+
+        .bulk-price-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+    /* Shop Cards */
+    .shop-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+        margin-bottom: 30px;
+    }
+
+        .shop-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .shop-card img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+    .shop-info {
+        padding: 15px;
+        background: #fff;
+    }
+
+    .shop-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Category Grid */
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .category-card {
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+    /* Seasonal Offers */
+    .offer-banner {
+        background: linear-gradient(45deg, #ff6b6b, #f8cf07);
+        color: white;
+        padding: 30px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .offer-countdown {
+        background: rgba(255,255,255,0.2);
+        padding: 10px 20px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    /* Best Selling Products */
+    .best-seller-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff6b6b;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+
+    /* Stats and Metrics */
+    .metrics-container {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .metric-item {
+        text-align: center;
+        padding: 15px;
+    }
+
+    .metric-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #f8cf07;
+    }
 </style>
 
+<!-- Hero Section -->
 <section class="slider-area">
     <div class="active-slider owl-carousel fix">
-        <!-- slider one  -->
-        <div class="single-slider " style="background-image:url('/_client/images/slider/slider.jpg') ;">
-           <div class="slider-content">
+        <div class="single-slider" style="background-image:url('/_client/images/slider/slider.jpg');">
+            <div class="slider-content">
                 <div class="hero-title">
-                    <h1 class="h2 color-white">Small Businesses,</h1>
-                    <h1 class="h0 color-brandsecondary">Big Impact!</h1>
+                    <h1 class="h2 color-white">Wholesale Business Hub</h1>
+                    <h1 class="color-brandsecondary">Bulk Deals & More!</h1>
                 </div>
                 <div class="hero-content">
-                    <p class="p-large color-white">Embedding commerce, logistics and financing solutions together to <br /> supercharge small businesses.</p>
+                    <p class="p-large color-white">Connect with top suppliers and get the best wholesale prices</p>
                 </div>
-                <div class="hero-product-container my-3"><img src="https://cdn.prod.website-files.com/6538a2c4ccf1fed5a7d6e311/654a1da81ae61b63cfc204b0_Mokam.svg" loading="lazy" alt="" class="product"><img src="https://cdn.prod.website-files.com/6538a2c4ccf1fed5a7d6e311/654a1da8ac603ede530040f7_REDX.svg" loading="lazy" alt="" class="product"><img src="https://cdn.prod.website-files.com/6538a2c4ccf1fed5a7d6e311/667d599194db7dbc7b294da3_Briddhi%20logo%201.svg" loading="lazy" width="Auto" alt="">
-                    </div>
-           </div>
+            </div>
         </div>
-
-        <!-- slider two -->
-        <div class="single-slider " style="background-image:url('/_client/images/slider/slider.jpg') ;">
-           
-        </div>
-        <!-- slider three -->
-        <div class="single-slider " style="background-image:url('/_client/images/slider/slider.jpg') ;">
-           
-        </div>
-
     </div>
 </section>
 
-
-
-<div class="container">
-
-    <section class="service-section">
-
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titie-section wow fadeInDown animated ">
-                        <h1>PRODUCT CATEGORY</h1>
-                    </div>
-                </div>
+<!-- Business Metrics Section -->
+<section class="metrics-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 metric-item">
+                <div class="metric-value">5000+</div>
+                <div class="metric-label">Active Suppliers</div>
             </div>
-
-
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            @foreach (var item in Model?.CategoryList)
-                            {
-                                <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.1s">
-                                    <div class="card">
-                                        <img src="@item.ImageUrl" class="card-img-top cate-img" alt="...">
-                                        <div class="card-body">
-                                            <i class="fas fa-pepper-hot fa-3x"></i>
-                                            <h5 class="card-title">@item.Name</h5>
-
-                                            <a asp-action="Index" asp-controller="Products" asp-area="PublicUser" asp-route-id="@item.Id" class="btn btn-outline-dark">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                          
-
-                            
-
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.1s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/the-fruits-of-bangladesh.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-apple-alt fa-3x"></i>
-                                        <h5 class="card-title">Fruits</h5>
-
-                                        <a href="shop_fruits.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.2s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/vegetables_bd_1.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-carrot fa-3x"></i>
-                                        <h5 class="card-title">Vegetables</h5>
-
-                                        <a href="shop_vegetables.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.3s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/spice.webp" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-pepper-hot fa-3x"></i>
-                                        <h5 class="card-title">Spices</h5>
-
-                                        <a href="shop_spices.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/dairy.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-utensils fa-3x"></i>
-                                        <h5 class="card-title">Dairy Products</h5>
-
-                                        <a href="shop_dairy.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/snacks.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-cookie-bite fa-3x"></i>
-                                        <h5 class="card-title">Snacks</h5>
-
-                                        <a href="shop_snacks.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/bravers.png" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-coffee fa-3x"></i>
-                                        <h5 class="card-title">Beverages</h5>
-
-                                        <a href="shop_beverages.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/meat.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-drumstick-bite fa-3x"></i>
-                                        <h5 class="card-title">Meat</h5>
-
-                                        <a href="shop_meat.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/fish.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-fish fa-3x"></i>
-                                        <h5 class="card-title">Fish</h5>
-
-                                        <a href="shop_fish.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/nuts.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-seedling fa-3x"></i>
-                                        <h5 class="card-title">Nuts</h5>
-
-                                        <a href="shop_nuts.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/face (1).jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-utensils fa-3x"></i>
-                                        <h5 class="card-title">Face Care</h5>
-
-                                        <a href="shop_condiments.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/oil.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-oil-can fa-3x"></i>
-                                        <h5 class="card-title">Oils</h5>
-
-                                        <a href="shop_oils.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2 mb-4 col-sm-3 wow fadeInRight animated" data-wow-delay="0.4s">
-                                <div class="card">
-                                    <img src="/_client/images/Categories/gift.jpg" class="card-img-top cate-img" alt="...">
-                                    <div class="card-body">
-                                        <i class="fas fa-utensils fa-3x"></i>
-                                        <h5 class="card-title">Gift Item</h5>
-
-                                        <a href="shop_condiments.html" class="btn btn-outline-dark">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            <div class="col-md-3 metric-item">
+                <div class="metric-value">50,000+</div>
+                <div class="metric-label">Products</div>
+            </div>
+            <div class="col-md-3 metric-item">
+                <div class="metric-value">10,000+</div>
+                <div class="metric-label">Daily Orders</div>
+            </div>
+            <div class="col-md-3 metric-item">
+                <div class="metric-value">98%</div>
+                <div class="metric-label">Satisfaction Rate</div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="new-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titie-section wow fadeInDown animated ">
-                        <h1>OUR SHOP</h1>
+<!-- Top Selling Shops Section -->
+<section class="best-sellers-section py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>TOP PERFORMING SHOPS</h2>
+            <p>Partner with our most reliable wholesale suppliers</p>
+        </div>
+
+        <div class="row">
+            @for (int i = 1; i <= 4; i++)
+            {
+                <div class="col-md-3">
+                    <div class="shop-card">
+                        <img src="~/images/shop1.png" alt="Top Shop @i">
+                        <div class="shop-info">
+                            <h4>Wholesale Shop @i</h4>
+                            <div class="shop-stats">
+                                <span>⭐ 4.8/5</span>
+                                <span>📦 1000+ orders</span>
+                            </div>
+                            <div class="shop-stats">
+                                <span>🚚 98% on-time delivery</span>
+                                <span>✅ Verified</span>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Seasonal Offers Section -->
+<section class="seasonal-offers py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>SEASONAL SPECIALS</h2>
+            <p>Limited time wholesale deals</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="offer-banner">
+                    <h3>END OF SEASON SALE</h3>
+                    <p>Up to 30% off on bulk orders</p>
+                    <div class="offer-countdown">5 days left</div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.2s">
-                    <div class="card mb-4">
-                        <img src="/_client/images/shop/fruit-stall-in-bangladesh-BRXK3T.jpg" class="card-img-top shop-image" alt="Fresh Fruits">
-                        <div class="card-body">
-                            <h5 class="card-title">Fresh Fruits</h5>
-                            <p class="card-text">Explore a variety of fresh fruits sourced from local farms.</p>
-                            <a href="shop_fruits.html" class="btn btn-outline-dark">Visit Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.4s">
-                    <div class="card mb-4">
-                        <img src="/_client/images/shop/shop_2.webp" class="card-img-top shop-image" alt="Daily Groceries ">
-                        <div class="card-body">
-                            <h5 class="card-title">Daily Groceries</h5>
-                            <p class="card-text">Your one-stop shop for all daily grocery needs.</p>
-                            <a href="shop_groceries.html" class="btn btn-outline-dark">Visit Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.6s">
-                    <div class="card mb-4">
-                        <img src="/_client/images/shop/shop_3.jpg" class="card-img-top shop-image" alt="Organic Products">
-                        <div class="card-body">
-                            <h5 class="card-title">Organic Products</h5>
-                            <p class="card-text">Browse our range of organic and health-focused products.</p>
-                            <a href="shop_organic.html" class="btn btn-outline-dark">Visit Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.8s">
-                    <div class="card mb-4">
-                        <img src="/_client/images/shop/shop_1.jpg" class="card-img-top shop-image" alt="Spices and Condiments">
-                        <div class="card-body">
-                            <h5 class="card-title">Spices and Condiments</h5>
-                            <p class="card-text">Discover a wide range of spices and condiments.</p>
-                            <a href="shop_spices.html" class="btn btn-outline-dark">Visit Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.8s">
-                    <div class="card mb-4">
-                        <img src="/_client/images/shop/shop_4.jpg" class="card-img-top shop-image" alt="Beverages">
-                        <div class="card-body">
-                            <h5 class="card-title">Beverages</h5>
-                            <p class="card-text">Find your favorite beverages from around the world.</p>
-                            <a href="shop_beverages.html" class="btn btn-outline-dark">Visit Shop</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 wow fadeInLeft animated" data-wow-delay="0.8s">
-                    <div class="card mb-4">
-                        <img src="/_client/images/shop/shop_5.jpeg" class="card-img-top shop-image" alt="Bakery Items">
-                        <div class="card-body">
-                            <h5 class="card-title">Bakery Items</h5>
-                            <p class="card-text">Taste our fresh bakery items made daily.</p>
-                            <a href="shop_bakery.html" class="btn btn-outline-dark">Visit Shop</a>
-                        </div>
-                    </div>
+            <div class="col-md-6">
+                <div class="offer-banner" style="background: linear-gradient(45deg, #4facfe, #00f2fe);">
+                    <h3>NEW ARRIVAL SPECIAL</h3>
+                    <p>First order discount: 15% off</p>
+                    <div class="offer-countdown">New customers only</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<!-- Shop Categories Section -->
+<section class="shop-categories py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>SHOP BY BUSINESS TYPE</h2>
+            <p>Find suppliers that match your business needs</p>
+        </div>
 
-
-    <!-- featurre -->
-    <!-- Featured Section Begin -->
-    <!-- Featured Section End -->
-    <!-- Featured Section End -->
-
-    <section class="featured-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titie-section wow fadeInDown animated ">
-                        <h1>FEATURED PRODUCTS</h1>
+        <div class="category-grid">
+            @foreach (var category in new[] { "Manufacturers", "Distributors", "Exporters", "Local Suppliers", "Factory Outlets", "Bulk Retailers" })
+            {
+                <div class="category-card">
+                    <img src="/api/placeholder/300/200" alt="@category">
+                    <div class="p-3">
+                        <h5>@category</h5>
+                        <p class="mb-2 text-muted">Min. order value varies</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">View Suppliers</a>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="filter-menu">
-                        <ul class="button-group sort-button-group">
-                            <li class="button active" data-category="all">All<span>8</span></li>
-                            <li class="button" data-category="cat-1">Dresses and Suits<span>2</span></li>
-                            <li class="button" data-category="cat-2">Accessories<span>2</span></li>
-                            <li class="button" data-category="cat-3">Miscellaneous<span>4</span></li>
-                        </ul>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Product Categories Section -->
+<section class="product-categories py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>PRODUCT CATEGORIES</h2>
+            <p>Browse our extensive range of wholesale products</p>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model?.CategoryList)
+            {
+                <div class="col-md-2 mb-4">
+                    <div class="category-card">
+                        <img src="@item.ImageUrl" class="img-responsive" alt="@item.Name">
+                        <div class="p-3">
+                            <h5>@item.Name</h5>
+                            <div class="small text-muted mb-2">@(Random.Shared.Next(1000, 5000))+ products</div>
+                            <a href="#" class="btn btn-outline-dark btn-sm">Explore Products</a>
+                        </div>
                     </div>
                 </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="featured-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titie-section wow fadeInDown animated">
+                    <h1>WHOLESALE PRODUCTS</h1>
+                </div>
             </div>
+        </div>
 
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row ps-4 pb-5">
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row ps-4 pb-5">
+                        @foreach (var item in Model?.ActiveProductList)
+                        {
+                            <div class="col-md-3 col-sm-6 col-xs-12 featured-items">
+                                <div class="product-item">
+                                    <img src="@item?.Product?.ImageUrl" class="img-responsive" width="255" height="322" alt="@item?.Product?.Name">
+                                    <h4>@item?.Product?.Name</h4>
 
-                            @foreach (var item in Model?.ActiveProductList)
-                            {
-                                <div class="col-md-3 col-sm-6 col-xs-12 cat-3 featured-items isotope-item">
-                                    <div class="product-item">
-                                        <img src="@item?.Product?.ImageUrl" class="img-responsive" width="255" height="322" alt="">
-                                        <p>@item.?Product?.Name</p>
-                                        <div class="product-hover">
-                                            <div class="product-meta">
+                                    <div class="moq-badge">
+                                        MOQ: 100 PCS
+                                    </div>
 
-                                                <a href="#"><i class="fa-regular fa-eye"></i></a>
+                                    <table class="bulk-price-table">
+                                        <tr>
+                                            <td>100-499 pcs</td>
+                                            <td>৳ @(item?.Product?.SalePrice) /pc</td>
+                                        </tr>
+                                        <tr>
+                                            <td>500-999 pcs</td>
+                                            <td>৳ @(item?.Product?.SalePrice * 0.9) /pc</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1000+ pcs</td>
+                                            <td>৳ @(item?.Product?.SalePrice * 0.8) /pc</td>
+                                        </tr>
+                                    </table>
 
-                                                <a href="#" data-id="@item?.Product?.Id" class="add-cart-btn"><i class="pe-7s-cart"></i>Add to Cart</a>
+                                    <div class="product-hover">
+                                        <div class="product-meta">
+                                            <div class="quantity-control">
+                                                <input type="number"
+                                                       class="quantity-input form-control"
+                                                       placeholder="Quantity"
+                                                       min="100"
+                                                       step="100"
+                                                       value="100"
+                                                       data-moq="100">
+                                                <div class="invalid-feedback">
+                                                    Minimum order quantity is 100 pieces
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-title">
-
-
-                                            <p>Price <span class="ps-2">৳ @item?.Product?.SalePrice</span></p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-
-
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-
-
-
-    <section class="offer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 wow fadeInDown animated ">
-                    <h1>END OF SEASON SALE</h1>
-                    <h2>Up to 35% off Women's Denim</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="best-seller-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titie-section wow fadeInDown animated ">
-                        <h1>BEST SELLERS</h1>
-                    </div>
-                </div>
-            </div>
-
-
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-
-                        <div class="row ps-4 pb-5">
-                            @foreach (var item in Model?.LatestProductList)
-                            {
-                                <div class="col-md-3 col-sm-6 wow fadeInDown animated" data-wow-delay="0.2s">
-                                    <div class="product-item">
-                                        <img src="@item?.Product?.ImageUrl" class="img-responsive" width="255" height="322" alt="">
-                                        <p>@item?.Product?.Name</p>
-                                        <div class="product-hover">
-                                            <div class="product-meta">
-
-                                                <a href="#"><i class="fa-regular fa-eye"></i></a>
-
-                                                <a href="#" data-name="Oxford" data-price="1200" class="add-cart-btn"><i class="pe-7s-cart"></i>Add to Cart</a>
-                                            </div>
-                                        </div>
-                                        <div class="product-title">
-
-
-                                            <p>Price <span class="ps-2">৳ @item?.Product?.SalePrice</span></p>
-
+                                            <button class="add-cart-btn btn btn-primary"
+                                                    data-id="@item?.Product?.Id"
+                                                    data-name="@item?.Product?.Name"
+                                                    data-price="@item?.Product?.SalePrice">
+                                                <i class="pe-7s-cart"></i> Add to Quote
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            }
-
-
-
-
-                        </div>
+                            </div>
+                        }
                     </div>
-
-
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Additional Features -->
+<section class="features-section py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <i class="fas fa-truck fa-3x mb-3"></i>
+                <h5>Bulk Shipping</h5>
+                <p>Free shipping on large orders</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <i class="fas fa-certificate fa-3x mb-3"></i>
+                <h5>Quality Assured</h5>
+                <p>All suppliers verified</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <i class="fas fa-comments fa-3x mb-3"></i>
+                <h5>24/7 Support</h5>
+                <p>Dedicated assistance</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                <h5>Secure Payments</h5>
+                <p>Multiple payment options</p>
             </div>
         </div>
-    </section>
-
-
-    <section class="news-letter-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="title-section text-white wow fadeInDown animated">
-                        <h1>NEWSLETTER</h1>
-                    </div>
-                    <p>Follow a collection of news & promotions</p>
-                </div>
-            </div>
-            <div class="row subscribe-form">
-                <form class="row g-3 justify-content-center wow fadeInDown animated" aria-label="Newsletter Subscription">
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required aria-label="Enter your email">
-                            <button type="submit" class="btn btn-primary"><i class="pe-7s-next"></i></button>
-                        </div>
-                    </div>
-                </form><!-- end /. form -->
-            </div><!-- end of /. row -->
-        </div><!-- end of /.container -->
-    </section><!-- end of /.news letter section -->
-
-    <section class="client-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="title-section wow fadeInDown animated">
-                        <h1>Our Partners</h1>
-                    </div>
-                </div>
-            </div>
-            <div id="clientCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col-3">
-                                <a href="https://janatabank.com" aria-label="Visit Janata Bank">
-                                    <img src="/_client/images/janata.jpg" class="img-fluid" alt="Janata Bank Logo">
-                                </a>
-                            </div>
-                            <div class="col-3">
-                                <a href="https://dbbl.com" aria-label="Visit DBBL">
-                                    <img src="/_client/images/agrani.jpg" class="img-fluid" alt="DBBL Logo">
-                                </a>
-                            </div>
-                            <div class="col-3">
-                                <a href="https://islamibankbd.com" aria-label="Visit Islami Bank">
-                                    <img src="/_client/images/islami-bank.jpg" class="img-fluid" alt="Islami Bank Logo">
-                                </a>
-                            </div>
-                            <div class="col-3">
-                                <a href="https://agranibank.org" aria-label="Visit Agrani Bank">
-                                    <img src="/_client/images/agrani.jpg" class="img-fluid" alt="Agrani Bank Logo">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col-3">
-                                <a href="https://janatabank.com" aria-label="Visit Janata Bank">
-                                    <img src="/_client/images/janata.jpg" class="img-fluid" alt="Janata Bank Logo">
-                                </a>
-                            </div>
-                            <div class="col-3">
-                                <a href="https://dbbl.com" aria-label="Visit DBBL">
-                                    <img src="/_client/images/DBBl.jpg" class="img-fluid" alt="DBBL Logo">
-                                </a>
-                            </div>
-                            <div class="col-3">
-                                <a href="https://islamibankbd.com" aria-label="Visit Islami Bank">
-                                    <img src="/_client/images/islami-bank.jpg" class="img-fluid" alt="Islami Bank Logo">
-                                </a>
-                            </div>
-                            <div class="col-3">
-                                <a href="https://agranibank.org" aria-label="Visit Agrani Bank">
-                                    <img src="/_client/images/agrani.jpg" class="img-fluid" alt="Agrani Bank Logo">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#clientCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="news-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="titie-section wow fadeInDown animated ">
-                        <h1>Latest News</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.2s">
-                    <div class="blog-item">
-                        <a href="#"><img src="/_client/images/latest news/pic-1.jpg" width="350" height="262" alt=""></a>
-                        <h3>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean </h3>
-                        <p>Nam nec tellus a odio tincidunt auc. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-                <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.4s">
-                    <div class="blog-item">
-                        <a href="#"><img src="/_client/images/latest news/pic-2.jpg" width="350" height="262" alt=""></a>
-                        <h3>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean </h3>
-                        <p>Nam nec tellus a odio tincidunt auc. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt</p>
-                        <a href="#">Read More</a>
-
-                    </div>
-                </div>
-                <div class="col-sm-4 wow fadeInDown animated" data-wow-delay="0.6s">
-                    <div class="blog-item">
-                        <a href="#"><img src="/_client/images/latest news/pic-3.jpg" width="350" height="262" alt=""></a>
-                        <h3>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean </h3>
-                        <p>Nam nec tellus a odio tincidunt auc. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt</p>
-                        <a href="#">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-  
-
-
-
-
-
-
-
-
+    </div>
+</section>

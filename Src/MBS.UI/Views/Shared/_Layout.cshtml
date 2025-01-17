@@ -17,7 +17,83 @@
     <link rel="stylesheet" href="~/_client/css/owl.carousel.min.css">
     <link rel="stylesheet" href="~/_client/css/custom.css">
     <link rel="stylesheet" href="~/_client/css/cart.css">
+    <style>
 
+        .product-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .quantity-control {
+            position: relative;
+        }
+
+        .quantity-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .add-cart-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+            .add-cart-btn:hover {
+                background-color: #0056b3;
+            }
+
+        .bulk-price-table {
+            margin-bottom: 15px;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 4px;
+        }
+
+        .quantity-input.is-invalid {
+            border-color: #dc3545;
+        }
+
+            .quantity-input.is-invalid + .invalid-feedback {
+                display: block;
+            }
+
+        /* Modal styles */
+        .modal-lg {
+            max-width: 800px;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+        }
+
+        .delete-item {
+            color: #dc3545;
+            border: none;
+            background: none;
+            padding: 0;
+        }
+
+            .delete-item:hover {
+                color: #bd2130;
+            }
+
+        .item-count {
+            width: 100px;
+        }
+    </style>
 
 
 </head>
@@ -237,63 +313,53 @@
                 </div>
             </div>
         </section>
-
-        <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Your Cart</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Your Quote Cart</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <table class="show-cart table">
-                            <!-- Cart items will be dynamically added here -->
-                        </table>
-                        <div class="grand-total">Total price: ৳<span class="total-cart"></span></div>
-
-                        <div class="my-2">
-
-                            <a onclick="redirectToPage()" class="btn btn-dark d-block"> Place Order</a>
-                            @*   <a  class="btn btn-dark d-block"> Clear Order</a> *@
-                            <!-- <button type="button" class="btn btn-danger clear-all">Clear All</button> -->
-
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price/pc</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="show-cart">
+                                    <!-- Cart items will be dynamically added here -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-end"><strong>Grand Total:</strong></td>
+                                        <td colspan="2"><strong>৳<span class="total-cart">0</span></strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button type="button" class="btn btn-outline-danger clear-cart">
+                                <i class="fas fa-trash"></i> Clear Cart
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="redirectToPage()">
+                                <i class="fas fa-check"></i> Place Order
+                            </button>
                         </div>
                     </div>
-                    @*    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-danger clear-all">Clear All</button> -->
-                    </div> *@
                 </div>
             </div>
         </div>
 
-        </div>
+
 
     </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

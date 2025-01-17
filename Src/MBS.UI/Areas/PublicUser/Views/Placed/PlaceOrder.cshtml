@@ -1,70 +1,73 @@
 ﻿@model List<CartItem>
 @{
-    ViewData["Title"] = "PlaceOrder";
-    // int totalItem = Model?.Sum(item => item.Count) ?? 0;
-    // decimal subTotal = Model?.Sum(item => item.Price * item.Count) ?? 0;
-    // decimal shippingFee = 50; // Example fixed shipping fee
-    // decimal total = subTotal + shippingFee;
-
-    
+    ViewData["Title"] = "Place Order";
     int totalItem = Model?.Sum(item => item.Count) ?? 0;
     decimal subTotal = Model?.Sum(item => item.Price * item.Count) ?? 0;
-    decimal shippingFee = 50; // Example fixed shipping fee
-    decimal totalAmount = subTotal + shippingFee; // Calculate total amount
+    decimal shippingFee = 50;
+    decimal totalAmount = subTotal + shippingFee;
 }
 
-<link rel="stylesheet" href="~/css/placedOarder.css" />
+<link rel="stylesheet" href="~/css/placedOrder.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-<h1>Your Cart Items</h1>
+<div class="container-fluid">
+    <h1 class="mb-4">Your Cart Items</h1>
 
-<div class="pd-cry">
     <div class="row">
-        <div class="col-md-8 ps-4 mt-3">
-            <div class="select-al">
-                <div class="row">
-                    <div class="col-md-6">
-                        <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
-                        <label class="form-check-label" for="selectAll">SELECT ALL</label>
-                    </div>
-                    <div class="col-md-6 select-dl text-end">
-                        <button><i class="bi bi-trash3"></i> DELETE</button>
+        <!-- Cart Items Section -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleSelectAll(this)">
+                                <label class="form-check-label" for="selectAll">SELECT ALL</label>
+                            </div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash3"></i> DELETE
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-3 px-5">
-                <div class="row">
+                <div class="card-body">
                     @if (Model != null && Model.Any())
                     {
                         foreach (var item in Model)
                         {
                             decimal totalItemPrice = item.Price * item.Count;
-                            <div class="col-md-12 pd mb-2">
-                                <div class="row">
-                                    <div class="col-md-6 ps-4">
-                                        <div class="item-list d-flex">
-                                            <div class="item-image d-flex">
-                                                <input class="form-check-input mt-5" type="checkbox" value="" id="itemCheck_@item.Id">
-                                                <div class="pd-img mt-4">
-                                                    <img src="@item.ImagePath" alt="">
-                                                </div>
+                            <div class="cart-item mb-3">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="itemCheck_@item.Id">
                                             </div>
-                                            <div class="item-text prod-text pt-4">
-                                                <p class="f1">@item.Name</p>
-                                                <p class="color1">x @item.Count</p>
-                                                <span class="bs">BEST PRICE</span>
+                                            <div class="product-image mx-3">
+                                                <img src="@item.ImagePath" alt="@item.Name" class="img-fluid" style="max-width: 100px;">
+                                            </div>
+                                            <div class="product-details">
+                                                <h6 class="mb-1">@item.Name</h6>
+                                                <p class="text-muted mb-1">Quantity: @item.Count</p>
+                                                <span class="badge bg-success">BEST PRICE</span>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
-                                        <div class="pro-price text-end pt-4">
-                                            <p class="f1"><span class="f4">৳</span> @item.Price.ToString("F2")</p>
-                                            <small class="f1"><small>৳</small> @totalItemPrice.ToString("F2")</small>
-                                            <p>
-                                                <a class="color2 pe-1" href="#"><i class="bi bi-heart"></i></a>
-                                                <a class="color2" href="#"><i class="bi bi-trash3"></i></a>
-                                            </p>
+                                        <div class="text-end">
+                                            <h6 class="mb-1">৳ @item.Price.ToString("F2")</h6>
+                                            <p class="text-muted mb-2">Total: ৳ @totalItemPrice.ToString("F2")</p>
+                                            <div class="actions">
+                                                <button class="btn btn-link text-danger p-0 me-2">
+                                                    <i class="bi bi-heart"></i>
+                                                </button>
+                                                <button class="btn btn-link text-danger p-0">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,75 +76,271 @@
                     }
                     else
                     {
-                        <h2>Your cart is empty.</h2>
+                        <div class="text-center py-5">
+                            <i class="bi bi-cart-x display-1 text-muted"></i>
+                            <h3 class="mt-3">Your cart is empty</h3>
+                            <a href="/" class="btn btn-primary mt-3">Continue Shopping</a>
+                        </div>
                     }
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mt-3">
-            <div class="location pe-2">
-                <div class="loc-header">
-                    <p class="color3">Location</p>
-                    <p class="f3"><span class="color3"><i class="bi bi-geo-alt"></i></span> Add Shipping Address</p>
-                </div>
+        <!-- Order Summary Section -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Address Selection -->
+                    <div class="mb-4">
+                        <h5 class="card-title">Shipping Address</h5>
+                        <select id="shippingAddress" class="form-select mb-2">
+                            <option value="">Select an address</option>
+                        </select>
+                        <button class="btn btn-outline-primary btn-sm w-100" onclick="showAddressForm()">
+                            <i class="bi bi-plus-circle"></i> Add New Address
+                        </button>
+                    </div>
 
-                <div>
-                    <p class="loc-order">Order Summary</p>
-                    <div class="row pe-3">
-                        <div class="col-md-6">
-                            <p class="color2">Subtotal (@totalItem items)</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="text-end loc-order"><span class="f4">৳ </span> @subTotal.ToString("F2")</p>
+                    <!-- Saved Address Display -->
+                    <div id="savedAddressContainer" class="mb-4" style="display: none;">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Delivery Address</h6>
+                                <div class="saved-address-details">
+                                    <p class="fw-bold mb-1" id="savedFullName"></p>
+                                    <p class="mb-1" id="savedPhoneNumber"></p>
+                                    <p class="mb-1" id="savedAddressLine1"></p>
+                                    <p class="mb-1" id="savedAddressLine2"></p>
+                                    <p class="mb-1">
+                                        <span id="savedCity"></span>,
+                                        <span id="savedState"></span>
+                                        <span id="savedZipCode"></span>
+                                    </p>
+                                    <p class="mb-0 text-success" id="savedIsDefault"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row pe-3">
-                        <div class="col-md-6">
-                            <p class="color2">Shipping Fee</p>
+
+                    <!-- Order Summary -->
+                    <h5 class="card-title">Order Summary</h5>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Subtotal (@totalItem items)</span>
+                            <span>৳ @subTotal.ToString("F2")</span>
                         </div>
-                        <div class="col-md-6">
-                            <p class="text-end loc-order"><span class="f4">৳ </span> @shippingFee.ToString("F2")</p>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Shipping Fee</span>
+                            <span>৳ @shippingFee.ToString("F2")</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total</span>
+                            <span>৳ @totalAmount.ToString("F2")</span>
                         </div>
                     </div>
-                </div>
-                
-                <div class="row pe-3">
-                    <div class="col-md-6 pt-2">
-                        <p class="color2">Total</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="text-end loc-order color2"><span class="f4">৳ </span> @totalAmount.ToString("F2")</p>
-                    </div>
-                </div>
-                <div class="chack-box">
-                    <button class="btn btn-dark w-100" onclick="proceedToCheckout(@totalItem, @totalAmount)">
+
+                    <!-- Checkout Button -->
+                    <button class="btn btn-primary w-100" onclick="proceedToCheckout(@totalItem, @totalAmount)">
                         PROCEED TO CHECKOUT (@totalItem)
                     </button>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    function toggleSelectAll(selectAllCheckbox) {
-        const itemCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#selectAll)');
-        itemCheckboxes.forEach(checkbox => {
-            checkbox.checked = selectAllCheckbox.checked;
+<!-- Address Modal -->
+<div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addressModalLabel">Add New Address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addressForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                        <div class="invalid-feedback">Please enter your full name</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phoneNumber" required>
+                        <div class="invalid-feedback">Please enter a valid phone number</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addressLine1" class="form-label">Address Line 1</label>
+                        <input type="text" class="form-control" id="addressLine1" required>
+                        <div class="invalid-feedback">Please enter your address</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addressLine2" class="form-label">Address Line 2 (Optional)</label>
+                        <input type="text" class="form-control" id="addressLine2">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" required>
+                            <div class="invalid-feedback">Please enter your city</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" class="form-control" id="state" required>
+                            <div class="invalid-feedback">Please enter your state</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="zipCode" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" id="zipCode" required>
+                        <div class="invalid-feedback">Please enter your zip code</div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="isDefault">
+                        <label class="form-check-label" for="isDefault">Set as default address</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveAddressButton">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    Save Address
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        // Configure toastr options
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            timeOut: 3000
+        };
+
+        // Toggle all checkboxes
+        function toggleSelectAll(selectAllCheckbox) {
+            const itemCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#selectAll)');
+            itemCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
+        // Show address modal
+        function showAddressForm() {
+            const addressModal = new bootstrap.Modal(document.getElementById('addressModal'));
+            addressModal.show();
+        }
+
+        // Proceed to checkout
+        function proceedToCheckout(totalItems, totalAmount) {
+            const selectedAddress = $("#shippingAddress").val();
+            if (!selectedAddress) {
+                toastr.error("Please select a shipping address");
+                return;
+            }
+
+            window.location.href = `/PublicUser/Placed/PaymentOrder?totalItems=${totalItems}&totalAmount=${totalAmount}&addressId=${selectedAddress}`;
+        }
+
+        // Document ready handler
+        $(document).ready(function () {
+            // Fetch existing addresses
+            $.ajax({
+                url: "/PublicUser/Placed/GetShippingAddresses",
+                type: "GET",
+                dataType: "json",
+                success: function (addresses) {
+                    const addressDropdown = $("#shippingAddress");
+                    if (addresses && addresses.length > 0) {
+                        addresses.forEach(function (address) {
+                            const option = `<option value="${address.id}">${address.fullName}, ${address.city}, ${address.state}</option>`;
+                            addressDropdown.append(option);
+                        });
+                    } else {
+                        addressDropdown.html('<option value="">No saved addresses</option>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching shipping addresses:", error);
+                    toastr.error("Failed to load shipping addresses");
+                }
+            });
+
+            // Handle address form submission
+            $("#saveAddressButton").click(function () {
+                const form = document.getElementById('addressForm');
+                const saveButton = $(this);
+                const spinner = saveButton.find('.spinner-border');
+
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                const addressData = {
+                    fullName: $("#fullName").val().trim(),
+                    phoneNumber: $("#phoneNumber").val().trim(),
+                    addressLine1: $("#addressLine1").val().trim(),
+                    addressLine2: $("#addressLine2").val().trim(),
+                    city: $("#city").val().trim(),
+                    state: $("#state").val().trim(),
+                    zipCode: $("#zipCode").val().trim(),
+                    isDefault: $("#isDefault").prop('checked')
+                };
+
+                // Disable form and show loading state
+                saveButton.prop('disabled', true);
+                spinner.removeClass('d-none');
+
+                $.ajax({
+                    url: '/PublicUser/Placed/SaveShippingAddress',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(addressData),
+                    success: function (response) {
+                        if (response.success) {
+                            // Update the dropdown with the new address
+                            const newOption = `<option value="${response.savedAddress.id}" selected>
+                                                ${response.savedAddress.fullName}, ${response.savedAddress.city}, ${response.savedAddress.state}
+                                            </option>`;
+                            $("#shippingAddress").html(newOption);
+
+                            // Update the saved address display
+                            $("#savedAddressContainer").show();
+                            $("#savedFullName").text(response.savedAddress.fullName);
+                            $("#savedPhoneNumber").text(response.savedAddress.phoneNumber);
+                            $("#savedAddressLine1").text(response.savedAddress.addressLine1);
+                            $("#savedAddressLine2").text(response.savedAddress.addressLine2 || '');
+                            $("#savedCity").text(response.savedAddress.city);
+                            $("#savedState").text(response.savedAddress.state);
+                            $("#savedZipCode").text(response.savedAddress.zipCode);
+                            $("#savedIsDefault").text(response.savedAddress.isDefault ? 'Default Delivery Address' : '');
+
+                            // Close the modal
+                            bootstrap.Modal.getInstance(document.getElementById('addressModal')).hide();
+
+                            // Show success message
+                            toastr.success('Address saved successfully');
+
+                            // Reset the form
+                            form.reset();
+                            form.classList.remove('was-validated');
+                        } else {
+                            toastr.error("Failed to save address");
+                        }
+                    },
+                    error: function () {
+                        toastr.error("Error occurred while saving address");
+                    }
+                });
+            });
         });
-    }
-
-
-    function proceedToCheckout(totalItems, totalAmount) {
-        debugger
-        // Redirect to the PaymentOrder action with totalItems and totalAmount as parameters
-        window.location.href = `/PublicUser/Placed/PaymentOrder?totalItems=${totalItems}&totalAmount=${totalAmount}`;
-    }
-
-  
-
-
-
-</script>
+    </script>
+}
