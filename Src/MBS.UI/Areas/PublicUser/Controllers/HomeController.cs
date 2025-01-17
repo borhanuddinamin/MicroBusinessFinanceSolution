@@ -79,13 +79,13 @@ namespace MBS.UI.Areas.PublicUser.Controllers
             return Json(new { data = item });
         }
         
-        [HttpGet]
-        public ActionResult GetProductById(int[] id)
+        [HttpPost]
+        public ActionResult getProductsByIds([FromBody]  int[] id)
         {
 
 
-            var item=_unitOfWork.Product.GetFirstOrDefault(x=>x.Id == id);
-            return Json(new { data = item });
+            var items=_unitOfWork.Product.GetAllByIds(id);
+            return Json(new { data = items });
         }
 
 

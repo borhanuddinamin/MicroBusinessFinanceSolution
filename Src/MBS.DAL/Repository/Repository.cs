@@ -45,6 +45,41 @@ namespace MBS.DAL.Repository
             
             return query.ToList();
         }
+        public IEnumerable<T> GetAllByIds(IEnumerable<int> ids, string? includeProperties = null)
+        {
+            if (ids == null || !ids.Any())
+            {
+                throw new ArgumentException("The list of IDs cannot be null or empty.", nameof(ids));
+            }
+
+            IQueryable<T> query = dbSet;
+
+            // Include navigation properties if specified
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+
+            // Use reflection to get the 'Id' property
+            var parameter = Expression.Parameter(typeof(T), "entity");
+            var property = Expression.Property(parameter, "Id");
+            var containsMethod = typeof(Enumerable).GetMethods()
+                .First(m => m.Name == "Contains" && m.GetParameters().Length == 2)
+                .MakeGenericMethod(typeof(int));
+            var idsExpression = Expression.Constant(ids);
+            var containsExpression = Expression.Call(containsMethod, idsExpression, property);
+            var lambda = Expression.Lambda<Func<T, bool>>(containsExpression, parameter);
+
+            query = query.Where(lambda);
+
+            return query.ToList();
+        }
+
+
+
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
         {

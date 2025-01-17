@@ -13,6 +13,7 @@ namespace MBS.DAL.Repository.IRpository
         void Add(T entity);
         T GetFirstOrDefault(Expression<Func<T, bool>> filter);
         IEnumerable<T> GetAllById(Expression<Func<T, bool>> filter, string? includeproperties = null);
+        IEnumerable<T> GetAllByIds(IEnumerable<int> ids, string? includeProperties = null);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }
